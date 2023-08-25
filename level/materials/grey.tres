@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ctpfdudsbys51"]
+
+[resource]
+resource_name = "grey"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.435294, 0.490196, 0.615687, 1)
