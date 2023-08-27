@@ -5,7 +5,6 @@ extends Node3D
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -27,16 +26,8 @@ func _input(event):
 		if result:
 			# see if we clicked somewhere we should be able to walk to
 			if result.collider.get_class() == 'StaticBody3D':
-				# clear out any other markers that have been made
-				if has_node('MoveTo'):
-					var old = get_node('MoveTo')
-					old.name = 'DeletedMoveTo'
-					old.queue_free()
-					
-				# add a new marker for where the player should move to
-				var marker = Marker3D.new()
-				add_child(marker)
-				marker.global_position = result.position
-				marker.name = 'MoveTo'
+				# set the position the agent should move to
+				var nav_agent = $Team/Elena/NavigationAgent3D
+				nav_agent.target_position = result.position
 			else:
 				print('clicked on', result)

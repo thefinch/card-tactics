@@ -46,8 +46,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.880476, 0)
 shape = SubResource("CapsuleShape3D_vlvic")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Team/Elena"]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
 
 [node name="Model" parent="Team/Elena" instance=ExtResource("2_8o6g2")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+script = null
 
 [node name="Map" type="Node3D" parent="."]
 

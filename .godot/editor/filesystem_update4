@@ -1,4 +1,4 @@
 res://level/level.tscn
+res://level/CharacterBody3D.gd
 res://characters/elena/elena.tscn
 res://level/level.gd
-res://level/CharacterBody3D.gd
