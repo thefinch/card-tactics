@@ -1,4 +1,6 @@
-res://level/level.tscn
-res://level/CharacterBody3D.gd
+res://characters/elena/elena_model.tscn
+res://game/game.tscn
 res://characters/elena/elena.tscn
-res://level/level.gd
+res://levels/level/level.tscn
+res://game/game.gd
+res://characters/character.gd

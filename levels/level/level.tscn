@@ -1,13 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://ouiftrn1js4i"]
+[gd_scene load_steps=7 format=3 uid="uid://ouiftrn1js4i"]
 
-[ext_resource type="Script" path="res://level/level.gd" id="1_nohh4"]
-[ext_resource type="PackedScene" uid="uid://c3obpb38jr41" path="res://characters/elena/elena.tscn" id="2_8o6g2"]
-[ext_resource type="Script" path="res://level/CharacterBody3D.gd" id="2_tlfdn"]
-[ext_resource type="Material" uid="uid://d2ao4vti8qjxi" path="res://materials/light_grey.tres" id="4_qrcyx"]
-[ext_resource type="Material" uid="uid://dvu1sqg5uqjw8" path="res://materials/light_brown.tres" id="5_mmji2"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vlvic"]
-height = 1.83279
+[ext_resource type="Material" uid="uid://d2ao4vti8qjxi" path="res://materials/light_grey.tres" id="4_oqrna"]
+[ext_resource type="Material" uid="uid://dvu1sqg5uqjw8" path="res://materials/light_brown.tres" id="5_cmlna"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_8eobo"]
 vertices = PackedVector3Array(3.25, 0.5834, -1.7, 3.55, 0.5834, -1.7, 3.5, 0.5834, -9.85, 3.2, 0.783401, -1.55, 3.25, 0.5834, -1.7, 3.5, 0.5834, -9.85, -3.2, 0.5834, -9.85, 2.99355, 0.5834, -1.81774, -9.85, 0.5834, -1.55, 3.2, 0.783401, -1.55, -3.2, 0.5834, -9.85, -9.85, 0.5834, -9.85, 2.77903, 0.5834, -1.55, 2.99355, 0.5834, -1.81774, 8.4, 0.5834, -1.55, 8.4, 0.5834, -1.25, 9.85, 0.5834, -1.3, 8.3, 0.5834, -1.65, 8.4, 0.5834, -1.55, 9.85, 0.5834, -1.3, 9.85, 0.5834, -9.85, 8.3, 0.5834, -1.65, 9.85, 0.5834, -9.85, 3.5, 0.5834, -9.85, 3.55, 0.5834, -1.7, 3.25, 0.8334, 1.35, 3.6, 1.1834, 1.35, 3.6, 1.1834, -1.4, 3.25, 0.8334, -1.4, 3.2, 0.783401, 1.5, 3.25, 0.8334, 1.35, 3.25, 0.8334, -1.4, 3.2, 0.783401, -1.55, -9.85, 0.5834, -1.55, -9.85, 0.5834, 1.5, 2.77903, 0.5834, -1.55, 2.60479, 0.5834, 1.10356, 3.6, 1.1834, 1.35, 8.1, 2.6834, 1.4, 8.1, 2.6834, -1.35, 3.6, 1.1834, -1.4, 5.00625, 2.5834, 1.36563, 5.2875, 2.6834, 1.36875, 5.2875, 2.6834, -1.38125, 5.00625, 2.5834, -1.38437, 4.99701, 2.5834, -0.701816, 5.30402, 2.6834, -0.699617, 4.75, 0.5834, -1.35, 4.75, 0.5834, 1.3, 5.05, 0.5834, 1.3, 5.05, 0.5834, -1.35, 5.4, 0.5834, -1.3, 5.4, 0.5834, 1.3, 5.6, 0.5834, 1.3, 5.6, 0.5834, -1.3, 6.9, 1.0334, -1.3, 6.9, 1.0334, 1.35, 8.05, 0.5834, 1.35, 8.05, 0.5834, -1.3, 7.475, 0.5834, -1.3, 7.475, 0.5834, 1.35, 7.395, 0.5834, -0.705, 8.4, 0.5834, -1.25, 8.4, 0.5834, 1.3, 9.85, 0.5834, 1.35, 9.85, 0.5834, -1.3, 9.85, 0.5834, 1.35, 8.4, 0.5834, 1.3, 8.4, 0.5834, 1.6, 9.85, 0.5834, 1.35, 8.4, 0.5834, 1.6, 8.3, 0.5834, 1.7, 9.85, 0.5834, 9.85, 3.65, 0.5834, 9.85, 9.85, 0.5834, 9.85, 8.3, 0.5834, 1.7, 3.65, 0.5834, 1.65, 3.65, 0.5834, 9.85, 3.65, 0.5834, 1.65, 3.25, 0.5834, 1.65, 3.65, 0.5834, 9.85, 3.25, 0.5834, 1.65, 3.2, 0.783401, 1.5, -3.1, 0.5834, 9.85, 2.895, 0.5834, 2.595, -9.85, 0.5834, 1.5, -9.85, 0.5834, 9.85, -3.1, 0.5834, 9.85, 3.2, 0.783401, 1.5, 2.29809, 0.5834, 2.0007)
@@ -25,61 +19,32 @@ size = Vector3(20, 1, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6seql"]
 
 [node name="Level" type="Node3D"]
-script = ExtResource("1_nohh4")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 6.33813, 5.59406, 3.37474)
-current = true
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.806754, 0.590887, 0, -0.590887, 0.806754, 0, -0.190257, -1.05879)
-shadow_enabled = true
-
-[node name="Team" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
-
-[node name="Elena" type="CharacterBody3D" parent="Team"]
-script = ExtResource("2_tlfdn")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Team/Elena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.880476, 0)
-shape = SubResource("CapsuleShape3D_vlvic")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Team/Elena"]
-path_desired_distance = 0.1
-target_desired_distance = 0.1
-
-[node name="Model" parent="Team/Elena" instance=ExtResource("2_8o6g2")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-script = null
-
-[node name="Map" type="Node3D" parent="."]
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Map"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_8eobo")
 
-[node name="Floor" type="CSGBox3D" parent="Map/NavigationRegion3D"]
-material_override = ExtResource("4_qrcyx")
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
+material_override = ExtResource("4_oqrna")
 size = Vector3(20, 1, 20)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Map/NavigationRegion3D/Floor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/NavigationRegion3D/Floor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor/StaticBody3D"]
 shape = SubResource("BoxShape3D_r7v2i")
 
-[node name="Ramp" type="CSGBox3D" parent="Map/NavigationRegion3D"]
+[node name="Ramp" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(2.12132, -2.12132, 0, 2.12132, 2.12132, 0, 0, 0, 3, 5.18329, 0.504721, -0.0308132)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Map/NavigationRegion3D/Ramp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Ramp"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/NavigationRegion3D/Ramp/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ramp/StaticBody3D"]
 shape = SubResource("BoxShape3D_88762")
 
-[node name="Obstacle" type="CSGBox3D" parent="Map/NavigationRegion3D"]
+[node name="Obstacle" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 6.70286, 1.12658, 0)
-material_override = ExtResource("5_mmji2")
+material_override = ExtResource("5_cmlna")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Map/NavigationRegion3D/Obstacle"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Obstacle"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/NavigationRegion3D/Obstacle/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle/StaticBody3D"]
 shape = SubResource("BoxShape3D_6seql")

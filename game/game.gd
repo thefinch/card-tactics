@@ -1,9 +1,17 @@
 extends Node3D
 
+var active_character: Character
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	# load up the map
+	var level = preload("res://levels/level/level.tscn").instantiate()
+	$Map.add_child(level)
+
+	# load up the characters
+	var elena = preload("res://characters/elena/elena.tscn").instantiate()
+	$Team.add_child(elena)
+	active_character = elena
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -27,7 +35,7 @@ func _input(event):
 			# see if we clicked somewhere we should be able to walk to
 			if result.collider.get_class() == 'StaticBody3D':
 				# set the position the agent should move to
-				var nav_agent = $Team/Elena/NavigationAgent3D
+				var nav_agent = active_character.get_nav_agent()
 				nav_agent.target_position = result.position
 			else:
 				print('clicked on', result)

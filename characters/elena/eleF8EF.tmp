@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw1woffddg3hx"]
+
+[ext_resource type="Script" path="res://characters/character.gd" id="1_na0sd"]
+[ext_resource type="PackedScene" uid="uid://c3obpb38jr41" path="res://characters/elena/elena_model.tscn" id="2_vyw0m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dkgv6"]
+height = 1.83279
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_na0sd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5.594, 3.375)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.806754, 0.590887, 0, -0.590887, 0.806754, 0, -0.190257, -1.05879)
+shadow_enabled = true
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.880476, 0)
+shape = SubResource("CapsuleShape3D_dkgv6")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D"]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+
+[node name="Model" parent="CharacterBody3D" instance=ExtResource("2_vyw0m")]

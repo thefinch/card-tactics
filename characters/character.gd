@@ -1,10 +1,14 @@
+class_name Character
+
 extends CharacterBody3D
 
-@onready var animation_player = get_node('Model/AnimationPlayer')
-@onready var nav_agent: NavigationAgent3D = get_node("NavigationAgent3D")
+#@onready var character_body: CharacterBody3D = get_node('CharacterBody3D')
+@onready var animation_player: AnimationPlayer = get_node('Model/AnimationPlayer')
+@onready var nav_agent: NavigationAgent3D = get_node('NavigationAgent3D')
 
 enum states {IDLE, WALK}
 var state = states.IDLE
+var move_speed = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +21,7 @@ func _ready():
 	# start the idle animation
 	change_animation('Idle')
 
-func move_to_point(delta, speed):
+func move_to_point(_delta, speed):
 	# change the animation if needed
 	if animation_player.get_current_animation() != 'Walk':
 		change_animation('Walk')
@@ -41,7 +45,7 @@ func _process(delta):
 		change_animation('Idle')
 		return
 	
-	move_to_point(delta, 3)
+	move_to_point(delta, move_speed)
 
 # switches to the provided animation
 func change_animation(label):
@@ -58,33 +62,5 @@ func change_animation(label):
 	# play the animation we want
 	animation_player.play(label)
 
-#func _input(event):
-	# figure out which state we need to be in
-#	var direction
-#	if event is InputEventKey:
-#		if event.pressed:
-#			match event.keycode:
-#				KEY_W:
-#					state = states.WALK
-#					direction = Vector3(0, global_position.y, 1)
-#				KEY_A:
-#					state = states.WALK
-#					direction = Vector3(1, global_position.y, 0)
-#				KEY_S:
-#					state = states.WALK
-#					direction = Vector3(0, global_position.y, -1)
-#				KEY_D:
-#					state = states.WALK
-#					direction = Vector3(-1, global_position.y, 0)
-#				_:
-#					state = states.IDLE
-#		elif event.is_released():
-#			state = states.IDLE
-		
-	# change the state if needed
-#	var state_animations = {
-#		states.IDLE: 'Idle',
-#		states.WALK: 'Walk'
-#	}
-#	if animation_player.get_current_animation() != state_animations[state]:
-#		change_animation(state_animations[state])
+func get_nav_agent():
+	return nav_agent
