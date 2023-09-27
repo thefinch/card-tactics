@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://by8muw5ccihpv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_utmu5"]
+
+[node name="falling_column" type="Node3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGCylinder3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCylinder3D/StaticBody3D"]
+shape = SubResource("CylinderShape3D_utmu5")

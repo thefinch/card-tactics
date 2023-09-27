@@ -1,7 +1,8 @@
-Character
 CollisionShape3D
 StaticBody3D
+CSGCylinder3D
 Node3D
+Character
 Node
 Marker3D
 NavigationAgent3D

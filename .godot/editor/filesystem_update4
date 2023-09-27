@@ -4,3 +4,4 @@ res://characters/elena/elena.tscn
 res://levels/level/level.tscn
 res://game/game.gd
 res://characters/character.gd
+res://levels/interactables/falling_column.tscn
