@@ -2,6 +2,6 @@ res://characters/elena/elena_model.tscn
 res://game/game.tscn
 res://characters/elena/elena.tscn
 res://levels/level/level.tscn
+res://levels/interactables/falling_column.tscn
 res://game/game.gd
 res://characters/character.gd
-res://levels/interactables/falling_column.tscn

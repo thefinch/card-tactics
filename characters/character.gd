@@ -8,7 +8,7 @@ extends CharacterBody3D
 
 enum states {IDLE, WALK}
 var state = states.IDLE
-var move_speed = 3
+var move_speed = 8
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,7 +21,16 @@ func _ready():
 	# start the idle animation
 	change_animation('Idle')
 
-func move_to_point(_delta, speed):
+# make changes each frame
+func _process(_delta):
+	if nav_agent.is_navigation_finished():
+		change_animation('Idle')
+		return
+	
+	move_to_point(move_speed)
+
+# moves this character to the given point
+func move_to_point(speed):
 	# change the animation if needed
 	if animation_player.get_current_animation() != 'Walk':
 		change_animation('Walk')
@@ -36,16 +45,10 @@ func move_to_point(_delta, speed):
 	# move
 	velocity = direction * speed
 	move_and_slide()
-	
+
+# turn around, every now and then I get a little bit lonely
 func face_direction(direction):
 	look_at(Vector3(direction.x, global_position.y, direction.z), Vector3.UP)
-
-func _process(delta):
-	if nav_agent.is_navigation_finished():
-		change_animation('Idle')
-		return
-	
-	move_to_point(delta, move_speed)
 
 # switches to the provided animation
 func change_animation(label):
@@ -62,5 +65,6 @@ func change_animation(label):
 	# play the animation we want
 	animation_player.play(label)
 
-func get_nav_agent():
-	return nav_agent
+# set the nav agent
+func set_target_position(new_position: Vector3):
+	nav_agent.target_position = new_position
