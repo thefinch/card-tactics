@@ -2,7 +2,6 @@ class_name Character
 
 extends CharacterBody3D
 
-#@onready var character_body: CharacterBody3D = get_node('CharacterBody3D')
 @onready var animation_player: AnimationPlayer = get_node('Model/AnimationPlayer')
 @onready var nav_agent: NavigationAgent3D = get_node('NavigationAgent3D')
 
@@ -23,6 +22,7 @@ func _ready():
 
 # make changes each frame
 func _process(_delta):
+	# drop back into idle if we're done moving
 	if nav_agent.is_navigation_finished():
 		change_animation('Idle')
 		return
@@ -68,3 +68,7 @@ func change_animation(label):
 # set the nav agent
 func set_target_position(new_position: Vector3):
 	nav_agent.target_position = new_position
+	
+# when anything looks at this character, it should be looking here
+func get_look_at():
+	return $LookAt
