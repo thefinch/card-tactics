@@ -95,6 +95,8 @@ transform = Transform3D(-3.16154e-08, 0, 1, 0, 1, 0, -0.723277, 0, -4.37114e-08,
 transform = Transform3D(11.2359, -3.41273, 0, 6.89209, 5.56362, 0, 0, 0, 10.526, -31.3034, -0.0541906, -19.319)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/BetweenRamps/BottomStairs"]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/BetweenRamps/BottomStairs/StaticBody3D"]
 shape = SubResource("BoxShape3D_88762")
@@ -103,6 +105,8 @@ shape = SubResource("BoxShape3D_88762")
 transform = Transform3D(25.868, 0, 0, 0, 5.6451, 0, 0, 0, 10.526, -14.4777, 3.34935, -19.319)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/BetweenRamps/Middle"]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/BetweenRamps/Middle/StaticBody3D"]
 shape = SubResource("BoxShape3D_88762")
@@ -111,6 +115,8 @@ shape = SubResource("BoxShape3D_88762")
 transform = Transform3D(11.2389, 3.4103, 0, -6.88719, 5.56511, 0, 0, 0, 10.526, 2.37267, -0.0541892, -19.3756)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/BetweenRamps/TopStairs"]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/BetweenRamps/TopStairs/StaticBody3D"]
 shape = SubResource("BoxShape3D_88762")
