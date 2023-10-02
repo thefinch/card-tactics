@@ -3,6 +3,10 @@ res://game/game.tscn
 res://characters/elena/elena.tscn
 res://levels/level/level.tscn
 res://levels/interactables/falling_column.tscn
-res://game/CameraController.gd
-res://game/game.gd
+res://levels/components/bridge.tscn
+res://camera/camera_controller.tscn
+res://levels/create_error.tscn
 res://characters/character.gd
+res://game/camera_controller.gd
+res://camera/camera_controller.gd
+res://game/game.gd

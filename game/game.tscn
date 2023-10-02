@@ -1,24 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnqdcu0p7abgr"]
+[gd_scene load_steps=3 format=3 uid="uid://bi2srsicdbg3m"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_rn5rw"]
-[ext_resource type="Script" path="res://game/CameraController.gd" id="2_dtk2w"]
+[ext_resource type="PackedScene" uid="uid://bqw5fu8gytho1" path="res://camera/camera_controller.tscn" id="2_sgppk"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_rn5rw")
 
-[node name="CameraController" type="Node3D" parent="."]
-script = ExtResource("2_dtk2w")
-
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
-collision_mask = 2
-spring_length = 15.0
-
-[node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
-current = true
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraController/SpringArm3D/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.806754, 0.590887, 0, -0.590887, 0.806754, 0, -0.190257, -1.05879)
-shadow_enabled = true
+[node name="CameraController" parent="." instance=ExtResource("2_sgppk")]
 
 [node name="Team" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)

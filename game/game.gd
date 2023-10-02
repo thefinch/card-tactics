@@ -1,14 +1,14 @@
 extends Node3D
 
-@onready var camera = get_node('CameraController')
-
 var active_character: Character
 var zoom_speed = 25
+
+@onready var camera = get_node('CameraController')
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	# load up the map
-	var level = preload("res://levels/level/level.tscn").instantiate()
+	var level = preload("res://levels/create_error.tscn").instantiate()
 	$Map.add_child(level)
 	level.global_rotate(Vector3(0, 1, 0), -45)
 
@@ -46,14 +46,14 @@ func _input(event):
 		and event.is_released()
 	if clicked:
 		handle_click()
-		
+
 	# check if we're zooming in
 	var zoom_in = event is InputEventMouseButton \
 		and event.button_index == MOUSE_BUTTON_WHEEL_UP \
 		and event.is_released()
 	if zoom_in:
 		camera.zoom(-1)
-		
+
 	# check if we're zooming out
 	var zoom_out = event is InputEventMouseButton \
 		and event.button_index == MOUSE_BUTTON_WHEEL_DOWN \

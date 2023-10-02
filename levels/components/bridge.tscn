@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2f6uufqbb33c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xyr3g"]
+size = Vector3(20, 1, 20)
+
+[node name="bridge" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+operation = 1
+
+[node name="Base" type="CSGBox3D" parent="CSGCombiner3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGCombiner3D/Base"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCombiner3D/Base/StaticBody3D"]
+shape = SubResource("BoxShape3D_xyr3g")
+
+[node name="RampLeft" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.491066, -0.200562, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGCombiner3D/RampLeft"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCombiner3D/RampLeft/StaticBody3D"]
+shape = SubResource("BoxShape3D_xyr3g")
+
+[node name="RampRight" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.497917, -0.200562, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGCombiner3D/RampRight"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCombiner3D/RampRight/StaticBody3D"]
+shape = SubResource("BoxShape3D_xyr3g")
+
+[node name="Remover" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.711395, 0)
+operation = 2
+size = Vector3(2.40535, 1, 1)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGCombiner3D/Remover"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCombiner3D/Remover/StaticBody3D"]
+shape = SubResource("BoxShape3D_xyr3g")

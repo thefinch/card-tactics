@@ -7,7 +7,7 @@ extends CharacterBody3D
 
 enum states {IDLE, WALK}
 var state = states.IDLE
-var move_speed = 8
+var move_speed = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,8 +20,12 @@ func _ready():
 	# start the idle animation
 	change_animation('Idle')
 
+func _on_velocity_computed(new_velocity):
+	velocity = new_velocity
+	move_and_slide()
+
 # make changes each frame
-func _process(_delta):
+func _physics_process(_delta):
 	# drop back into idle if we're done moving
 	if nav_agent.is_navigation_finished():
 		change_animation('Idle')
@@ -31,24 +35,27 @@ func _process(_delta):
 
 # moves this character to the given point
 func move_to_point(speed):
-	# change the animation if needed
-	if animation_player.get_current_animation() != 'Walk':
-		change_animation('Walk')
-
-	# figure out where we're going
-	var target_position = nav_agent.get_next_path_position()
-	var direction = global_position.direction_to(target_position)
+	# figure out where to go
+	change_animation('Walk')
+	var next_path_position: Vector3 = nav_agent.get_next_path_position()
+	var current_agent_position: Vector3 = global_position
+	var new_velocity: Vector3 = (next_path_position - current_agent_position).normalized() * speed
 	
-	# face the direction
-	face_direction(target_position)
+	# face where we want to go
+	var direction = global_position.direction_to(next_path_position)
+	face_direction(next_path_position)
 	
-	# move
-	velocity = direction * speed
-	move_and_slide()
+	# update the velocity
+	if nav_agent.avoidance_enabled:
+		nav_agent.set_velocity(new_velocity)
+	else:
+		_on_velocity_computed(new_velocity)
 
 # turn around, every now and then I get a little bit lonely
 func face_direction(direction):
-	look_at(Vector3(direction.x, global_position.y, direction.z), Vector3.UP)
+	var where_to_look = Vector3(direction.x, global_position.y, direction.z)
+	if global_position != where_to_look:
+		look_at(where_to_look, Vector3.UP)
 
 # switches to the provided animation
 func change_animation(label):
