@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ouiftrn1js4i"]
 
-[ext_resource type="PackedScene" uid="uid://by8muw5ccihpv" path="res://levels/interactables/falling_column.tscn" id="3_4owtp"]
-[ext_resource type="PackedScene" uid="uid://d2f6uufqbb33c" path="res://levels/components/bridge.tscn" id="4_kf54o"]
+[ext_resource type="PackedScene" uid="uid://by8muw5ccihpv" path="res://levels/interactables/FallingColumn.tscn" id="3_4owtp"]
+[ext_resource type="PackedScene" uid="uid://d2f6uufqbb33c" path="res://levels/components/Bridge.tscn" id="4_kf54o"]
 [ext_resource type="Material" uid="uid://d2ao4vti8qjxi" path="res://materials/light_grey.tres" id="4_oqrna"]
 [ext_resource type="Material" uid="uid://dvu1sqg5uqjw8" path="res://materials/light_brown.tres" id="5_cmlna"]
 

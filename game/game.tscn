@@ -11,4 +11,7 @@ script = ExtResource("1_rn5rw")
 [node name="Team" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
 
+[node name="Enemies" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
+
 [node name="Map" type="Node3D" parent="."]

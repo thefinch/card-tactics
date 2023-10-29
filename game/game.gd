@@ -5,12 +5,12 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# load up the map
-	var level = preload("res://levels/level/level.tscn").instantiate()
+	var level = preload("res://levels/level/Level.tscn").instantiate()
 	$Map.add_child(level)
 	level.global_rotate(Vector3(0, 1, 0), -45)
 
 	# load up the characters
-	var elena = preload("res://characters/elena/elena.tscn").instantiate()
+	var elena = preload("res://characters/elena/Elena.tscn").instantiate()
 	$Team.add_child(elena)
 	var char_scale = 3
 	elena.global_scale(Vector3(char_scale, char_scale, char_scale))

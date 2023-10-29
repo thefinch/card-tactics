@@ -17,13 +17,13 @@ func set_camera(new_camera:CameraController):
 	camera = new_camera
 
 func _input(event):
+	# handle moving the active character
 	var clicked = event is InputEventMouseButton \
 		and event.button_index == MOUSE_BUTTON_LEFT \
 		and event.is_released()
 	if clicked:
 		var hit = camera.get_what_was_clicked()
 		if hit:
-			print('old way')
 			set_active_character_target_position(hit.position)
 	
 	# check if we're zooming in
