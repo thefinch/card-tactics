@@ -5,14 +5,12 @@ extends CharacterBody3D
 @onready var animation_player: AnimationPlayer = get_node('Model/AnimationPlayer')
 @onready var nav_agent: NavigationAgent3D = get_node('NavigationAgent3D')
 
-enum states {IDLE, WALK}
-var state = states.IDLE
 var move_speed = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# make sure the animations are setup
-	var anim : Animation = animation_player.get_animation('Idle')
+	var anim: Animation = animation_player.get_animation('Idle')
 	anim.loop_mode = Animation.LOOP_LINEAR
 	anim = animation_player.get_animation('Walk')
 	anim.loop_mode = Animation.LOOP_LINEAR
@@ -75,7 +73,3 @@ func change_animation(label):
 # set the nav agent
 func set_target_position(new_position: Vector3):
 	nav_agent.target_position = new_position
-	
-# when anything looks at this character, it should be looking here
-func get_look_at():
-	return $LookAt

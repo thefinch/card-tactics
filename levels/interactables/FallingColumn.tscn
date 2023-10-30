@@ -14,4 +14,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGCylinder3D/StaticBody3D"]
 shape = SubResource("CylinderShape3D_utmu5")
 
-[node name="Combatant" parent="." instance=ExtResource("1_g7y5d")]
+[node name="Combatant" parent="." groups=["enemy"] instance=ExtResource("1_g7y5d")]

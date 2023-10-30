@@ -3,6 +3,10 @@ extends Node3D
 var active_character: Character
 var camera: CameraController
 
+# manage the modes for the game
+enum MODES {ADVENTURE, BATTLE}
+var current_mode = MODES.ADVENTURE
+
 # tells the active character where to go
 func set_active_character_target_position(selected_position):
 	active_character.set_target_position(selected_position)
@@ -15,16 +19,40 @@ func set_active_character(new_active: Character):
 # sets which camera is active
 func set_camera(new_camera:CameraController):
 	camera = new_camera
+	
+func begin_battle():
+	current_mode = MODES.BATTLE
+	
+	# create a new battle manager
+	var battle = Battle.new()
+	
+	# add all the controllable combatants
+	var combatants = get_tree().get_nodes_in_group('combatant')
+	for combatant in combatants:
+		if combatant.is_in_group('controllable'):
+			battle.add_combatant(combatant)
+	
+	# add all the enemy combatants
+	for combatant in combatants:
+		if !combatant.is_in_group('controllable'):
+			battle.add_combatant(combatant)
+	
+	# commence the fighting
+	battle.do_battle()
+	
+	# when everything is done, let us explore again
+	battle.end_of_battle.connect(begin_adventure)
+	
+func begin_adventure():
+	current_mode = MODES.ADVENTURE
 
 func _input(event):
-	# handle moving the active character
-	var clicked = event is InputEventMouseButton \
-		and event.button_index == MOUSE_BUTTON_LEFT \
-		and event.is_released()
-	if clicked:
-		var hit = camera.get_what_was_clicked()
-		if hit:
-			set_active_character_target_position(hit.position)
+	# handle input differently depending on the mode we're in
+	match current_mode:
+		MODES.ADVENTURE:
+			handle_adventure_input(event)
+		MODES.BATTLE:
+			handle_battle_input(event)
 	
 	# check if we're zooming in
 	var zoom_in = event is InputEventMouseButton \
@@ -39,3 +67,16 @@ func _input(event):
 		and event.is_released()
 	if zoom_out:
 		camera.zoom(1)
+
+func handle_adventure_input(event):
+	# handle moving the active character
+	var clicked = event is InputEventMouseButton \
+		and event.button_index == MOUSE_BUTTON_LEFT \
+		and event.is_released()
+	if clicked:
+		var hit = camera.get_what_was_clicked()
+		if hit:
+			set_active_character_target_position(hit.position)
+			
+func handle_battle_input(event):
+	pass

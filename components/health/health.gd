@@ -1,13 +1,15 @@
 extends Node3D
 
+class_name Health
+
 # the max health of this thing
-@export var max_health : int = 1
+@export var max_health: int = 1
 
 # the current health of this thing
-var current_health : int
+var current_health: int
 
-# signal sent with this is dead
-signal dead
+# signal sent when this is dead
+signal dead(thing_that_died)
 
 # signal sent when this is damaged
 signal damaged
@@ -24,11 +26,11 @@ func get_health():
 	return current_health
 
 # decreases current health by given amount of damage
-func deal_damage(damage : int):
+func deal_damage(damage: int):
 	prints('dealing damage', damage)
 	# deal the damage
 	current_health -= damage
-	emit_signal('damaged')
+	damaged.emit()
 	
 	# max sure we never go negative
 	if current_health <= 0:
@@ -36,14 +38,15 @@ func deal_damage(damage : int):
 		
 	# check if this is dead
 	if current_health == 0:
-		emit_signal('dead')
+		dead.emit(self)
 	prints('current health', current_health)
 
 # increases the current health by the given amount
-func heal(health : int):
+func heal(health: int):
 	prints('healing for', health)
 	# heal us up
 	current_health += health
+	healed.emit()
 	
 	# make sure we can't overheal
 	if current_health > max_health:
