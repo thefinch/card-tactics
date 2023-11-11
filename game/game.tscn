@@ -15,3 +15,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
 
 [node name="Map" type="Node3D" parent="."]
+
+[node name="ActionMenu" type="PopupMenu" parent="."]

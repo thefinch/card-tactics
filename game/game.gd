@@ -10,11 +10,29 @@ func _ready():
 	level.global_rotate(Vector3(0, 1, 0), -45)
 
 	# load up the characters
-	var elena = preload("res://characters/elena/Elena.tscn").instantiate()
-	$Team.add_child(elena)
-	var char_scale = 3
-	elena.global_scale(Vector3(char_scale, char_scale, char_scale))
+	var elena_scene = "res://characters/elena/Elena.tscn"
+	var elena = load_character(elena_scene)
 	
 	# let the manager know what it needs to know
 	Manager.set_camera(camera)
 	Manager.set_active_character(elena)
+
+	Manager.begin_battle()
+
+# load up the characters
+func load_character(character):
+	# load the character
+	var loaded = load(character).instantiate()
+	
+	# populate the actions for the combatant
+	var combatant = loaded.get_combatant()
+	var attack = Attack.new()
+	combatant.add_action(attack)
+	prints('the combatant', combatant)
+	
+	# add the character to the scene
+	$Team.add_child(loaded)
+	var char_scale = 3
+	loaded.global_scale(Vector3(char_scale, char_scale, char_scale))
+	
+	return loaded

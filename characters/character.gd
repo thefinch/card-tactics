@@ -73,3 +73,7 @@ func change_animation(label):
 # set the nav agent
 func set_target_position(new_position: Vector3):
 	nav_agent.target_position = new_position
+
+# gets the combantant for this character
+func get_combatant():
+	return $Combatant
