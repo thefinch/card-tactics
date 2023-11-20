@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Card Tactics"
-run/main_scene="res://game/Game.tscn"
+run/main_scene="res://game/game.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Manager="*res://game/manager.gd"
+UI="*res://ui/ui.tscn"
 
 [navigation]
 

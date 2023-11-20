@@ -18,6 +18,7 @@ func set_target(new_target: Combatant):
 
 # deals damage from the attack and resets the target
 func execute():
+	prints('going to attack this target', target)
 	target.get_health_manager().deal_damage(damage)
 	
 	target = null

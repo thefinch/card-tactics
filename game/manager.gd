@@ -78,5 +78,5 @@ func handle_adventure_input(event):
 		if hit:
 			set_active_character_target_position(hit.position)
 			
-func handle_battle_input(event):
+func handle_battle_input(_event):
 	pass
