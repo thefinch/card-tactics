@@ -20,6 +20,12 @@ func execute_selected_action(id):
 	var actions = $Actions.get_children()
 	for action in actions:
 		if action.get_label() == selected_action_label:
+			# prepare for the action as needed
+			# i.e. select a target
+			action.prepare()
+			await action.prepared
+			
+			# execute tha action
 			action.execute()
 			await action.finished
 			

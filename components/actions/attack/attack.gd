@@ -16,6 +16,11 @@ func _ready():
 func set_target(new_target: Combatant):
 	target = new_target
 
+# requests the manager
+func prepare():
+	supervisor.select_target(self)
+	prepared.emit()
+
 # deals damage from the attack and resets the target
 func execute():
 	prints('going to attack this target', target)
