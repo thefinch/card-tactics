@@ -1,7 +1,5 @@
 extends Node
 
-class_name Battle
-
 signal end_of_battle
 
 # the combatants involved in the battle
@@ -13,18 +11,27 @@ var turn_order
 # the combatant that is currently taking their turn
 var current_combatant: Combatant
 
+# gets the list of combatants
+func get_combatants():
+	return combatants.duplicate()
+
+# removes all combatants from this battle
+func reset_combatants():
+	combatants = []
+
 # creates a new turn order based on the current combatants
 func make_new_turn_order():
 	turn_order = combatants.duplicate()
+	print('new turn order', turn_order)
 
 # adds a new combatant to the queue
 func add_combatant(new_combatant: Combatant):
+	# making the combatant start the next turn when theirs is done
+	new_combatant.turn_finished.connect(next_turn)
+	
 	prints('adding combatant to list', new_combatant)
 	combatants.append(new_combatant)
 	make_new_turn_order()
-	
-	# when the combatant dies, remove them from the list of combatants
-	new_combatant.get_health_manager().dead.connect(remove_combatant)
 
 # if a combatant can't fight anymore, take them out of the turn structure
 func remove_combatant(no_longer_fighting: Combatant):
@@ -33,18 +40,15 @@ func remove_combatant(no_longer_fighting: Combatant):
 
 # ends the current combatant's turn and queues up the next combatant
 func next_turn():
+	# end combat when no one is around to fight
+	if combatants.is_empty():
+		end_of_battle.emit()
+
+	# make a new turn order if everyone has taken their turn
 	if turn_order.is_empty():
 		make_new_turn_order()
 	
+	# make the next combatant take their turn
 	current_combatant = turn_order.pop_front()
-	
-	return current_combatant
-
-func do_battle():
-	while !combatants.is_empty():
-		next_turn()
-		prints('current combatant taking turn', current_combatant)
-		current_combatant.take_turn()
-		await current_combatant.turn_finished
-		
-	end_of_battle.emit()
+	prints('current combatant taking turn', current_combatant)
+	current_combatant.take_turn()

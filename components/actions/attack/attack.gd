@@ -18,8 +18,10 @@ func set_target(new_target: Combatant):
 
 # requests the manager
 func prepare():
-	supervisor.select_target(self)
+	var selected_target = supervisor.select_target(self)
+	set_target(selected_target)
 	prepared.emit()
+	prints('emitted the prepared signal')
 
 # deals damage from the attack and resets the target
 func execute():

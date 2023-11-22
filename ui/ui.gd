@@ -7,12 +7,11 @@ func populate_action_menu(actions: Array):
 	action_menu.clear()
 	
 	# list out all the possible actions
-	var selected_action
 	for action in actions:
 		var label = action.get_label()
-		prints('label for action', label)
 		action_menu.add_item(label)
-		
+	
+	# show the menu
 	action_menu.show()
 
 func get_action_menu() -> PopupMenu:

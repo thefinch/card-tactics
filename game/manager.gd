@@ -24,24 +24,24 @@ func begin_battle():
 	current_mode = MODES.BATTLE
 	
 	# create a new battle manager
-	var battle = Battle.new()
+	Battle.reset_combatants()
 	
 	# add all the controllable combatants
 	var combatants = get_tree().get_nodes_in_group('combatant')
 	for combatant in combatants:
 		if combatant.is_in_group('controllable'):
-			battle.add_combatant(combatant)
+			Battle.add_combatant(combatant)
 	
 	# add all the enemy combatants
 	for combatant in combatants:
 		if !combatant.is_in_group('controllable'):
-			battle.add_combatant(combatant)
+			Battle.add_combatant(combatant)
+	
+	# when the battle is over, shift us back into adventure mode
+	Battle.end_of_battle.connect(begin_adventure)
 	
 	# commence the fighting
-	battle.do_battle()
-	
-	# when everything is done, let us explore again
-	battle.end_of_battle.connect(begin_adventure)
+	Battle.next_turn()
 	
 func begin_adventure():
 	current_mode = MODES.ADVENTURE

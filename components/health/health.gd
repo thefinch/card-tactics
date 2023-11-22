@@ -9,7 +9,7 @@ class_name Health
 var current_health: int
 
 # signal sent when this is dead
-signal dead(thing_that_died)
+signal dead
 
 # signal sent when this is damaged
 signal damaged
@@ -38,7 +38,7 @@ func deal_damage(damage: int):
 		
 	# check if this is dead
 	if current_health == 0:
-		dead.emit(self)
+		dead.emit()
 	prints('current health', current_health)
 
 # increases the current health by the given amount
