@@ -8,3 +8,5 @@ script = ExtResource("1_t8ior")
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Actions" type="PopupMenu" parent="HUD"]
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false

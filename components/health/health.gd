@@ -37,9 +37,9 @@ func deal_damage(damage: int):
 		current_health = 0
 		
 	# check if this is dead
+	prints('current health', current_health)
 	if current_health == 0:
 		dead.emit()
-	prints('current health', current_health)
 
 # increases the current health by the given amount
 func heal(health: int):

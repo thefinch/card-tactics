@@ -26,4 +26,5 @@ func prepare():
 
 # executes the action
 func execute():
+	prints('emitting the finished signal')
 	finished.emit()

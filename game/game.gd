@@ -23,12 +23,14 @@ func _ready():
 func load_character(character):
 	# load the character
 	var loaded = load(character).instantiate()
+	var scene_name = loaded.scene_file_path.get_file().replace('.tscn', '')
+	loaded.name = scene_name
 	
 	# populate the actions for the combatant
 	var combatant = loaded.get_combatant()
+	combatant.name = 'combatant:' + scene_name
 	var attack = Attack.new()
 	combatant.add_action(attack)
-	prints('the combatant', combatant)
 	
 	# add the character to the scene
 	$Team.add_child(loaded)

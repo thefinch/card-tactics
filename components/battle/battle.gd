@@ -29,17 +29,18 @@ func add_combatant(new_combatant: Combatant):
 	# making the combatant start the next turn when theirs is done
 	new_combatant.turn_finished.connect(next_turn)
 	
-	prints('adding combatant to list', new_combatant)
+	prints('adding combatant to list', new_combatant.name)
 	combatants.append(new_combatant)
 	make_new_turn_order()
 
 # if a combatant can't fight anymore, take them out of the turn structure
 func remove_combatant(no_longer_fighting: Combatant):
 	combatants.erase(no_longer_fighting)
-	make_new_turn_order()
+	turn_order.erase(no_longer_fighting)
 
 # ends the current combatant's turn and queues up the next combatant
 func next_turn():
+	prints('\ntaking next turn\n')
 	# end combat when no one is around to fight
 	if combatants.is_empty():
 		end_of_battle.emit()

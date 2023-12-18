@@ -34,6 +34,9 @@ func begin_battle():
 	
 	# add all the enemy combatants
 	for combatant in combatants:
+		combatant.set_pre_turn_callback(func():
+			camera.set_active_character(combatant)
+		)
 		if !combatant.is_in_group('controllable'):
 			Battle.add_combatant(combatant)
 	
