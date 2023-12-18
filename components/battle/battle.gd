@@ -1,6 +1,6 @@
 extends Node
 
-signal end_of_battle
+signal end_of_battle(controllable_combatants_left)
 
 # the combatants involved in the battle
 var combatants: Array = []
@@ -30,7 +30,7 @@ func add_combatant(new_combatant: Combatant):
 	new_combatant.turn_finished.connect(func():
 		# wait before the next turn starts
 		prints('waiting for the next turn to start')
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(3.0).timeout
 		prints('starting the next turn')
 		
 		# take the next turn
@@ -49,10 +49,21 @@ func remove_combatant(no_longer_fighting: Combatant):
 # ends the current combatant's turn and queues up the next combatant
 func next_turn():
 	prints('\ntaking next turn\n')
+	# end game when there are no controllable characters
+	var still_controllable = false
+	for combatant in combatants:
+		if combatant.controllable:
+			still_controllable = true
+			break
+	if not still_controllable:
+		prints('game is over')
+		end_of_battle.emit(false)
+		return
+	
 	# end combat when no one is around to fight
 	if combatants.size() < 2:
 		prints('battle is over')
-		end_of_battle.emit()
+		end_of_battle.emit(true)
 		return
 
 	# make a new turn order if everyone has taken their turn

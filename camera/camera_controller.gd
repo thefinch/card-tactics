@@ -4,7 +4,7 @@ class_name CameraController
 
 @onready var camera = get_node('SpringArm3D/Camera3D')
 
-var active_character
+var active_target
 var zoom_speed = 10
 var max_height = 70
 var min_height = 30
@@ -16,24 +16,24 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if active_character == null:
+	if active_target == null:
 		return
 
 	# set new y position if needed
-	var screen_position_of_character = camera.unproject_position(active_character.global_position)
+	var screen_position_of_target = camera.unproject_position(active_target.global_position)
 	var screen = get_viewport().size
 	var third = screen.y / 3
 	var lower_third = 2 * third
 	var new_y = global_position.y
 	var y_offset = 1
-	if screen_position_of_character.y > lower_third:
+	if screen_position_of_target.y > lower_third:
 		new_y -= y_offset
-	elif screen_position_of_character.y < third:
+	elif screen_position_of_target.y < third:
 		new_y += y_offset
 
 	# move the camera
 	global_position = global_position.lerp(
-		Vector3(active_character.global_position.x, new_y, global_position.z),
+		Vector3(active_target.global_position.x, new_y, global_position.z),
 		delta * zoom_speed
 	)
 	camera.size = height
@@ -46,8 +46,8 @@ func zoom(height_change: int):
 	if height < min_height:
 		height = min_height
 
-func set_active_character(new_active_character):
-	active_character = new_active_character
+func set_active_target(new_active_target):
+	active_target = new_active_target
 	
 # figure out what we clicked on
 func get_what_was_clicked():

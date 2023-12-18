@@ -14,7 +14,7 @@ func set_active_character_target_position(selected_position):
 # sets the active character
 func set_active_character(new_active: Character):
 	active_character = new_active
-	camera.set_active_character(active_character)
+	camera.set_active_target(active_character)
 
 # sets which camera is active
 func set_camera(new_camera:CameraController):
@@ -35,16 +35,26 @@ func begin_battle():
 	# add all the enemy combatants
 	for combatant in combatants:
 		combatant.set_pre_turn_callback(func():
-			camera.set_active_character(combatant)
+			print('running pre-turn callback')
+			camera.set_active_target(combatant)
 		)
 		if !combatant.is_in_group('controllable'):
 			Battle.add_combatant(combatant)
 	
 	# when the battle is over, shift us back into adventure mode
-	Battle.end_of_battle.connect(begin_adventure)
+	Battle.end_of_battle.connect(end_battle)
 	
 	# commence the fighting
 	Battle.next_turn()
+	
+func end_battle(controllable_combatants_left):
+	# check for game over
+	if not controllable_combatants_left:
+		prints('game over! show a screen here dummy')
+		return
+	
+	# game on!
+	begin_adventure()
 	
 func begin_adventure():
 	prints('entering adventure mode')

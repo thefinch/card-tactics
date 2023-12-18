@@ -57,8 +57,8 @@ func set_pre_turn_callback(callback):
 # picks an action and executes it
 func take_turn():
 	# call the callback if necessary
-	#if pre_turn_callback:
-		#await pre_turn_callback.call()
+	if pre_turn_callback:
+		await pre_turn_callback.call()
 		
 	# end the turn if there's nothing to do
 	var actions = $Actions.get_children()
