@@ -47,6 +47,7 @@ func begin_battle():
 	Battle.next_turn()
 	
 func begin_adventure():
+	prints('entering adventure mode')
 	current_mode = MODES.ADVENTURE
 
 func _input(event):

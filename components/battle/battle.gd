@@ -27,7 +27,15 @@ func make_new_turn_order():
 # adds a new combatant to the queue
 func add_combatant(new_combatant: Combatant):
 	# making the combatant start the next turn when theirs is done
-	new_combatant.turn_finished.connect(next_turn)
+	new_combatant.turn_finished.connect(func():
+		# wait before the next turn starts
+		prints('waiting for the next turn to start')
+		await get_tree().create_timer(1.0).timeout
+		prints('starting the next turn')
+		
+		# take the next turn
+		next_turn()
+	)
 	
 	prints('adding combatant to list', new_combatant.name)
 	combatants.append(new_combatant)
@@ -42,8 +50,10 @@ func remove_combatant(no_longer_fighting: Combatant):
 func next_turn():
 	prints('\ntaking next turn\n')
 	# end combat when no one is around to fight
-	if combatants.is_empty():
+	if combatants.size() < 2:
+		prints('battle is over')
 		end_of_battle.emit()
+		return
 
 	# make a new turn order if everyone has taken their turn
 	if turn_order.is_empty():
