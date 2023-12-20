@@ -20,6 +20,9 @@ func set_active_character(new_active: Character):
 func set_camera(new_camera:CameraController):
 	camera = new_camera
 	
+func get_camera():
+	return camera
+	
 func begin_battle():
 	current_mode = MODES.BATTLE
 	

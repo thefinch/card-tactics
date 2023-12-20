@@ -16,18 +16,23 @@ func _ready():
 func set_target(new_target: Combatant):
 	target = new_target
 
-# requests the manager
+# requests that the supervisor selects a target
 func prepare():
+	# select the target
 	var selected_target = supervisor.select_target(self)
 	set_target(selected_target)
+	
+	# let things know we're ready to attack
 	prepared.emit()
-	prints('emitted the prepared signal')
 
-# deals damage from the attack and resets the target
+# attack the target
 func execute():
+	# deal the damage
 	prints('going to attack this target', target)
 	target.get_health_manager().deal_damage(damage)
 	
+	# reset the target
 	target = null
 	
+	# let things know that we're done here
 	finished.emit()

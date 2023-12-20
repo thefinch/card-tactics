@@ -20,6 +20,7 @@ func _ready():
 func get_health_manager() -> Health:
 	return $Health
 
+# selects which combatant we want to target
 func select_target(action: Action):
 	prints('selecting a target for action', action.get_label())
 	# get the combatants and remove yourself from the list
@@ -32,6 +33,13 @@ func select_target(action: Action):
 	# !! @TODO in the future, we want to highlight options and require a click to select !!
 
 	return target
+	
+func select_target_position():
+	if controllable:
+		# select the target from the UI
+		UI.select_target_position()
+		var selected_target = await UI.target_position_selected 
+		prints('selected target position', selected_target)
 
 func execute_selected_action(id):
 	print('hiding the menu')

@@ -29,8 +29,14 @@ func load_character(character):
 	# populate the actions for the combatant
 	var combatant = loaded.get_combatant()
 	combatant.name = 'combatant:' + scene_name
+	
+	# add the attack command
 	var attack = Attack.new()
 	combatant.add_action(attack)
+	
+	# add the move command
+	var move = Move.new()
+	combatant.add_action(move)
 	
 	# add the character to the scene
 	$Team.add_child(loaded)
