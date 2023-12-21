@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Battle="*res://components/battle/battle.gd"
-Manager="*res://game/manager.gd"
 UI="*res://ui/ui.tscn"
 
 [navigation]

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi2srsicdbg3m"]
+[gd_scene load_steps=6 format=3 uid="uid://bi2srsicdbg3m"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_rn5rw"]
 [ext_resource type="PackedScene" uid="uid://bqw5fu8gytho1" path="res://camera/camera_controller.tscn" id="2_sgppk"]
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_0cepn"]
+[ext_resource type="Script" path="res://states/adventure.gd" id="4_7avb2"]
+[ext_resource type="Script" path="res://states/battle.gd" id="5_tw6w4"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_rn5rw")
@@ -15,3 +18,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
 
 [node name="Map" type="Node3D" parent="."]
+
+[node name="InputStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_0cepn")
+starting_state = NodePath("Adventure")
+
+[node name="Adventure" type="Node" parent="InputStateMachine"]
+script = ExtResource("4_7avb2")
+
+[node name="Battle" type="Node" parent="InputStateMachine"]
+script = ExtResource("5_tw6w4")

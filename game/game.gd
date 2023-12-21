@@ -1,6 +1,15 @@
 extends Node3D
 
-@onready var camera = get_node('CameraController')
+@onready
+var camera = $CameraController
+
+@onready
+var state_machine = $InputStateMachine
+
+@onready
+var adventure_state = $InputStateMachine/Adventure
+
+var active_character: Character
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,11 +22,26 @@ func _ready():
 	var elena_scene = "res://characters/elena/Elena.tscn"
 	var elena = load_character(elena_scene)
 	
+	# when the battle is over, shift us back into adventure mode
+	Battle.end_of_battle.connect(end_battle)
+	
+	# initialize the state machine
+	state_machine.init(self)
+	
 	# let the manager know what it needs to know
-	Manager.set_camera(camera)
-	Manager.set_active_character(elena)
+	set_active_character(elena)
 
-	Manager.begin_battle()
+func get_camera():
+	return camera
+
+# gets the active character
+func get_active_character() -> Character:
+	return active_character
+
+# sets the active character
+func set_active_character(new_active: Character) -> void:
+	active_character = new_active
+	camera.set_active_target(active_character)
 
 # load up the characters
 func load_character(character):
@@ -44,3 +68,21 @@ func load_character(character):
 	loaded.global_scale(Vector3(char_scale, char_scale, char_scale))
 	
 	return loaded
+
+func end_battle(controllable_combatants_left):
+	# check for game over
+	if not controllable_combatants_left:
+		prints('game over! show a screen here dummy')
+		return
+	
+	# get back to 'venturin
+	state_machine.change_state($InputStateMachine/Adventure)
+
+func _unhandled_input(event: InputEvent) -> void:
+	state_machine.process_input(event)
+
+func _physics_process(delta: float) -> void:
+	state_machine.process_physics(delta)
+
+func _process(delta: float) -> void:
+	state_machine.process_frame(delta)
