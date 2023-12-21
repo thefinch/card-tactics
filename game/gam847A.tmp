@@ -26,6 +26,5 @@ starting_state = NodePath("Adventure")
 [node name="Adventure" type="Node" parent="InputStateMachine"]
 script = ExtResource("4_7avb2")
 
-[node name="Battle" type="Node" parent="InputStateMachine" node_paths=PackedStringArray("adventure_state")]
+[node name="Battle" type="Node" parent="InputStateMachine"]
 script = ExtResource("5_tw6w4")
-adventure_state = NodePath("../Adventure")

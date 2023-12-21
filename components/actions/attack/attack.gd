@@ -28,7 +28,6 @@ func prepare():
 # attack the target
 func execute():
 	# deal the damage
-	prints('going to attack this target', target)
 	target.get_health_manager().deal_damage(damage)
 	
 	# reset the target

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cw1woffddg3hx"]
+[gd_scene load_steps=6 format=3 uid="uid://cw1woffddg3hx"]
 
 [ext_resource type="Script" path="res://characters/character.gd" id="1_na0sd"]
 [ext_resource type="PackedScene" uid="uid://c3obpb38jr41" path="res://characters/elena/elena_model.tscn" id="2_vyw0m"]
 [ext_resource type="PackedScene" uid="uid://datg0pvj1dgho" path="res://components/combatant/Combatant.tscn" id="3_1bjyk"]
+[ext_resource type="Script" path="res://components/combatant/controllable.gd" id="4_luvkk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dkgv6"]
 height = 1.83279
@@ -24,4 +25,4 @@ debug_enabled = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Combatant" parent="." groups=["controllable"] instance=ExtResource("3_1bjyk")]
-controllable = true
+script = ExtResource("4_luvkk")

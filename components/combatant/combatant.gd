@@ -4,17 +4,15 @@ class_name Combatant
 
 signal turn_finished
 
-@export var controllable: bool = false
+# a function we call before the turn begins
+var pre_turn_callback: Callable
 
-var menu: PopupMenu
-var pre_turn_callback
+# the state that we will interact with to pull info about the battle
+var battle_state: State
 
-func _ready():
-	# when the combatant dies, remove them from the list of combatants
-	get_health_manager().dead.connect(func():
-		prints('removing combatant because it died', self)
-		Battle.remove_combatant(self)
-	)
+# sets the battle state that we will interact with
+func set_battle_state(new_battle_state: State) -> void:
+	battle_state = new_battle_state
 
 # gets the health manager
 func get_health_manager() -> Health:
@@ -24,7 +22,8 @@ func get_health_manager() -> Health:
 func select_target(action: Action):
 	prints('selecting a target for action', action.get_label())
 	# get the combatants and remove yourself from the list
-	var combatants = Battle.get_combatants()
+	var combatants = battle_state.get_combatants()
+	prints('combatants that we can choose from', combatants)
 	
 	# !! for testing we don't want to select ourself !!
 	combatants.erase(self)
@@ -35,31 +34,9 @@ func select_target(action: Action):
 	return target
 	
 func select_target_position():
-	if controllable:
-		# select the target from the UI
-		UI.select_target_position()
-		var selected_target = await UI.target_position_selected 
-		prints('selected target position', selected_target)
+	pass
 
-func execute_selected_action(id):
-	print('hiding the menu')
-	menu.hide()
-	menu.disconnect('id_pressed', execute_selected_action)
-	
-	# get the selected action from the popup menu
-	var index = menu.get_item_index(id)
-	var selected_action_label = menu.get_item_text(index)
-	
-	# find the action and execute it
-	var actions = $Actions.get_children()
-	prints('actions might be empty?', actions)
-	for action in actions:
-		prints('selected action: ', action.get_label())
-		if action.get_label() == selected_action_label:
-			prints('preparing the selected action', action.get_label())
-			action.prepare()
-
-func set_pre_turn_callback(callback):
+func set_pre_turn_callback(callback: Callable) -> void:
 	pre_turn_callback = callback
 
 # picks an action and executes it
@@ -75,24 +52,12 @@ func take_turn():
 		turn_finished.emit()
 		return
 	
-	# select an action
-	if controllable:
-		prints('selecting action from the menu')
-		UI.populate_action_menu(actions)
-		menu = UI.get_action_menu()
-		menu.connect('id_pressed', execute_selected_action)
-		
-		# show the menu
-		menu.show()
-		prints('showing the menu',menu)
-		
-		await menu.id_pressed
-	else:
-		prints('selecting action randomly')
-		var action = actions.pick_random()
-		prints('available actions', actions, 'selected action', action)
-		prints('preparing the random action', action.get_label())
-		action.prepare()
+	# default to picking a random action
+	prints('selecting action randomly')
+	var action = actions.pick_random()
+	prints('available actions', actions, 'selected action', action)
+	prints('preparing the random action', action.get_label())
+	action.prepare()
 
 # adds an action that this combatant can choose on its turn
 func add_action(new_action: Action):

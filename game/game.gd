@@ -13,20 +13,23 @@ var active_character: Character
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# load up the map
-	var level = preload("res://levels/level/Level.tscn").instantiate()
-	$Map.add_child(level)
-	level.global_rotate(Vector3(0, 1, 0), -45)
-
-	# load up the characters
-	var elena_scene = "res://characters/elena/Elena.tscn"
-	var elena = load_character(elena_scene)
-	
-	# when the battle is over, shift us back into adventure mode
-	Battle.end_of_battle.connect(end_battle)
+	load_level()
+	load_characters()
 	
 	# initialize the state machine
 	state_machine.init(self)
+	state_machine.change_state($InputStateMachine/Battle)
+
+func load_level() -> void:
+	# load up the map
+	var level = preload("res://levels/level/level.tscn").instantiate()
+	$Map.add_child(level)
+	level.global_rotate(Vector3(0, 1, 0), -45)
+
+func load_characters() -> void:
+	# load up the characters
+	var elena_scene = "res://characters/elena/elena.tscn"
+	var elena = load_character(elena_scene)
 	
 	# let the manager know what it needs to know
 	set_active_character(elena)
@@ -68,15 +71,6 @@ func load_character(character):
 	loaded.global_scale(Vector3(char_scale, char_scale, char_scale))
 	
 	return loaded
-
-func end_battle(controllable_combatants_left):
-	# check for game over
-	if not controllable_combatants_left:
-		prints('game over! show a screen here dummy')
-		return
-	
-	# get back to 'venturin
-	state_machine.change_state($InputStateMachine/Adventure)
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
