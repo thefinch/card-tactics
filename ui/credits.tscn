@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cwevedkw7c4wf"]
+
+[node name="Credits" type="Node2D"]
+
+[node name="ShoutOuts" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Godotneers
+https://www.youtube.com/@godotneers
+
+The Shaggy Dev
+https://www.youtube.com/@TheShaggyDev
+
+FinePointCGI
+https://www.youtube.com/@FinePointCGI
+
+and of course, everyone that makes Godot"
