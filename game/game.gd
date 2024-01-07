@@ -18,7 +18,6 @@ func _ready():
 	
 	# initialize the state machine
 	state_machine.init(self)
-	state_machine.change_state($InputStateMachine/Battle)
 
 func load_level() -> void:
 	# load up the map

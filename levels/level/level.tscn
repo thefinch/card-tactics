@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ouiftrn1js4i"]
+[gd_scene load_steps=9 format=3 uid="uid://ouiftrn1js4i"]
 
-[ext_resource type="PackedScene" uid="uid://by8muw5ccihpv" path="res://levels/interactables/FallingColumn.tscn" id="3_4owtp"]
-[ext_resource type="PackedScene" uid="uid://d2f6uufqbb33c" path="res://levels/components/Bridge.tscn" id="4_kf54o"]
+[ext_resource type="PackedScene" uid="uid://d2f6uufqbb33c" path="res://levels/components/bridge.tscn" id="4_18u52"]
 [ext_resource type="Material" uid="uid://d2ao4vti8qjxi" path="res://materials/light_grey.tres" id="4_oqrna"]
+[ext_resource type="PackedScene" uid="uid://by8muw5ccihpv" path="res://levels/interactables/falling_column.tscn" id="4_xwigu"]
 [ext_resource type="Material" uid="uid://dvu1sqg5uqjw8" path="res://materials/light_brown.tres" id="5_cmlna"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_8eobo"]
@@ -17,6 +17,10 @@ agent_max_slope = 60.0
 size = Vector3(117.114, 1, 76.8231)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6seql"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j1nur"]
+height = 3.0
+radius = 4.238
 
 [node name="Level" type="Node3D"]
 
@@ -363,17 +367,23 @@ size = Vector3(1, 6.74758, 1)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RightColumns/Obstacle16/StaticBody3D"]
 shape = SubResource("BoxShape3D_6seql")
 
-[node name="BackRightFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_4owtp")]
+[node name="BackRightFallingColumn" parent="NavigationRegion3D" instance=ExtResource("4_xwigu")]
 transform = Transform3D(3, 0, 0, 0, 10, 0, 0, 0, 3, 26.124, 0, 18.5)
 
-[node name="BackLeftFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_4owtp")]
+[node name="BackLeftFallingColumn" parent="NavigationRegion3D" instance=ExtResource("4_xwigu")]
 transform = Transform3D(3, 0, 0, 0, 10, 0, 0, 0, 3, 26.124, 0, -19.1647)
 
-[node name="TopRightFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_4owtp")]
+[node name="TopRightFallingColumn" parent="NavigationRegion3D" instance=ExtResource("4_xwigu")]
 transform = Transform3D(3, 0, 0, 0, 10, 0, 0, 0, 3, -52.1421, 0, 18.5)
 
-[node name="TopLeftFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_4owtp")]
+[node name="TopLeftFallingColumn" parent="NavigationRegion3D" instance=ExtResource("4_xwigu")]
 transform = Transform3D(3, 0, 0, 0, 10, 0, 0, 0, 3, -52.1421, 0, -19.1647)
 
-[node name="bridge" parent="NavigationRegion3D" instance=ExtResource("4_kf54o")]
+[node name="bridge" parent="NavigationRegion3D" instance=ExtResource("4_18u52")]
 transform = Transform3D(-9.99437, 0, 0.335564, 0, 4, 0, -0.335564, 0, -9.99437, -19.3994, 0.605195, 9.83502)
+
+[node name="Area3D" type="Area3D" parent="." groups=["battle_starter"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0539, 6.22261, 20.5287)
+shape = SubResource("CylinderShape3D_j1nur")

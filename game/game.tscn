@@ -23,8 +23,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
 script = ExtResource("3_0cepn")
 starting_state = NodePath("Adventure")
 
-[node name="Adventure" type="Node" parent="InputStateMachine"]
+[node name="Adventure" type="Node" parent="InputStateMachine" node_paths=PackedStringArray("battle_state")]
 script = ExtResource("4_7avb2")
+battle_state = NodePath("../Battle")
 
 [node name="Battle" type="Node" parent="InputStateMachine" node_paths=PackedStringArray("adventure_state")]
 script = ExtResource("5_tw6w4")

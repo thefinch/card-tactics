@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://c3obpb38jr41" path="res://characters/elena/elena_model.tscn" id="2_vyw0m"]
 [ext_resource type="PackedScene" uid="uid://datg0pvj1dgho" path="res://components/combatant/Combatant.tscn" id="3_1bjyk"]
 [ext_resource type="Script" path="res://components/combatant/controllable.gd" id="4_luvkk"]
+[ext_resource type="Script" path="res://state_machine/character_state_machine.gd" id="5_ctww0"]
 [ext_resource type="Script" path="res://states/character/idle.gd" id="5_qji43"]
-[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="5_ud16e"]
 [ext_resource type="Script" path="res://states/character/walking.gd" id="6_1e1go"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dkgv6"]
@@ -30,15 +30,13 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 [node name="Combatant" parent="." groups=["controllable"] instance=ExtResource("3_1bjyk")]
 script = ExtResource("4_luvkk")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
-script = ExtResource("5_ud16e")
-starting_state = NodePath("Idle")
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_ctww0")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("walking_state")]
+[node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("5_qji43")
-walking_state = NodePath("../Walking")
 
-[node name="Walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="WalkingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("6_1e1go")
-idle_state = NodePath("../Idle")
+idle_state = NodePath("../IdleState")
 move_speed = 10

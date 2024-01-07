@@ -1,5 +1,6 @@
 extends InputState
 
+# the state that manages exploration
 @export
 var adventure_state: State
 

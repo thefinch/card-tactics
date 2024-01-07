@@ -14,7 +14,7 @@ func exit() -> void:
 	pass
 
 # wrapper around the parent's _process_input call
-func process_input(event: InputEvent) -> State:	
+func process_input(event: InputEvent) -> State:
 	return null
 
 # wrapper around the parent's _process_physics call

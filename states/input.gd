@@ -3,9 +3,6 @@ extends State
 class_name InputState
 
 func process_input(event: InputEvent):
-	# check for any zooming
-	super(event)
-	
 	# check if we're zooming in
 	var zoom_in = event is InputEventMouseButton \
 		and event.button_index == MOUSE_BUTTON_WHEEL_UP \
