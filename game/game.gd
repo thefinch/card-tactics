@@ -1,14 +1,18 @@
 extends Node3D
 
+# the thing the manages the camera for us
 @onready
 var camera = $CameraController
 
+# the state manager
 @onready
-var state_machine = $InputStateMachine
+var state_machine = $StateMachine
 
+# an indicator for where something is going to happen
 @onready
-var adventure_state = $InputStateMachine/Adventure
+var area_indicator = $AreaIndicator
 
+# the active character
 var active_character: Character
 
 # Called when the node enters the scene tree for the first time.
@@ -33,6 +37,7 @@ func load_characters() -> void:
 	# let the manager know what it needs to know
 	set_active_character(elena)
 
+# gets the gamera manager
 func get_camera():
 	return camera
 
@@ -44,6 +49,15 @@ func get_active_character() -> Character:
 func set_active_character(new_active: Character) -> void:
 	active_character = new_active
 	camera.set_active_target(active_character)
+
+# places an indicator at the given position
+func place_area_indicator(new_position: Vector3) -> void:
+	area_indicator.position = new_position
+	area_indicator.visible = true
+	
+# hides the inidicator
+func hide_area_indicator():
+	area_indicator.visible = false
 
 # load up the characters
 func load_character(character):

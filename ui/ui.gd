@@ -4,7 +4,8 @@ extends Node2D
 signal target_position_selected(new_target_position)
 
 # the menu that shows up when an action needs to be selected
-@onready var action_menu: PopupMenu = $HUD/Actions
+@onready
+var action_menu: PopupMenu = $HUD/Actions
 
 func populate_action_menu(actions: Array):
 	prints('\npopulating action menu')

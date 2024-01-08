@@ -12,8 +12,12 @@ func enter() -> void:
 	var all_battle_starters = get_tree().get_nodes_in_group('battle_starter')
 	for starter:Area3D in all_battle_starters:
 		starter.body_entered.connect(func(body):
+			# flip the flag to send us into battle
 			if body == parent.get_active_character():
 				ready_for_battle = true
+			
+			# stop this from triggering a battle again
+			starter.visible = false
 		)
 
 func process_input(event: InputEvent):
@@ -28,8 +32,12 @@ func process_input(event: InputEvent):
 		var hit = parent.get_camera().get_what_was_clicked()
 		if hit:
 			parent.get_active_character().set_target_position(hit.position)
+			parent.place_area_indicator(hit.position)
 
 func process_frame(delta: float) -> State:
+	if parent.get_active_character().nav_agent.is_navigation_finished():
+		parent.hide_area_indicator()
+	
 	# switch to battle if we walked into a battle start area
 	if ready_for_battle:
 		# make sure we don't go back into battle
