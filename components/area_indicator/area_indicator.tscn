@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ty5stjlmjgjk"]
+
+[ext_resource type="ArrayMesh" uid="uid://cry7s44pow5kf" path="res://components/area_indicator/Sketchfab_Scene_Object_0.res" id="1_30uke"]
+
+[node name="Indicator" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_30uke")

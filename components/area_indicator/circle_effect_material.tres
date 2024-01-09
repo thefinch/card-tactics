@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ci6a4sis005ut"]
+
+[ext_resource type="Texture2D" uid="uid://va7v5ltpyy0o" path="res://components/area_indicator/circle_effect_0.jpg" id="1_wgowl"]
+
+[resource]
+resource_name = "circle_effect_material"
+albedo_texture = ExtResource("1_wgowl")
+roughness = 0.0
+emission_enabled = true
+emission_texture = ExtResource("1_wgowl")
+texture_filter = 1

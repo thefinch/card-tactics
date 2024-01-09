@@ -10,7 +10,11 @@ var state_machine = $StateMachine
 
 # an indicator for where something is going to happen
 @onready
-var area_indicator = $AreaIndicator
+var destination_area_indicator = $DestinationAreaIndicator
+
+# an indicator for where the active character can move during their turn
+@onready
+var move_area_indicator = $MoveAreaIndicator
 
 # the active character
 var active_character: Character
@@ -51,13 +55,17 @@ func set_active_character(new_active: Character) -> void:
 	camera.set_active_target(active_character)
 
 # places an indicator at the given position
-func place_area_indicator(new_position: Vector3) -> void:
-	area_indicator.position = new_position
-	area_indicator.visible = true
+func place_destination_area_indicator(new_position: Vector3, normal: Vector3) -> void:
+	destination_area_indicator.position = new_position
+	destination_area_indicator.rotation = normal
+	destination_area_indicator.visible = true
 	
 # hides the inidicator
-func hide_area_indicator():
-	area_indicator.visible = false
+func hide_destination_area_indicator():
+	destination_area_indicator.visible = false
+	
+func place_move_area_indicator(new_position):
+	move_area_indicator.position = new_position
 
 # load up the characters
 func load_character(character):

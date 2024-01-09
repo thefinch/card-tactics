@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://va7v5ltpyy0o"
-path.s3tc="res://.godot/imported/circle_effect_0.jpg-1e81cbf548b5bceb755bf8573df597ac.s3tc.ctex"
+uid="uid://7xj12c5oxkr8"
+path.s3tc="res://.godot/imported/move_area.jpg-432859f4b24d0bfff26554edc129ab06.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://game/area_indicator/circle_effect_0.jpg"
-dest_files=["res://.godot/imported/circle_effect_0.jpg-1e81cbf548b5bceb755bf8573df597ac.s3tc.ctex"]
+source_file="res://components/area_indicator/move_area.jpg"
+dest_files=["res://.godot/imported/move_area.jpg-432859f4b24d0bfff26554edc129ab06.s3tc.ctex"]
 
 [params]
 
