@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bi2srsicdbg3m"]
+[gd_scene load_steps=9 format=3 uid="uid://bi2srsicdbg3m"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_rn5rw"]
 [ext_resource type="PackedScene" uid="uid://bqw5fu8gytho1" path="res://camera/camera_controller.tscn" id="2_sgppk"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://chcjww8ni523w" path="res://components/area_indicator/move_area_indicator.tscn" id="4_eod88"]
 [ext_resource type="PackedScene" uid="uid://ty5stjlmjgjk" path="res://components/area_indicator/area_indicator.tscn" id="4_fp828"]
 [ext_resource type="Script" path="res://states/battle.gd" id="5_tw6w4"]
+[ext_resource type="Script" path="res://states/ui.gd" id="8_5o40l"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_rn5rw")
@@ -35,6 +36,11 @@ starting_state = NodePath("Adventure")
 script = ExtResource("4_7avb2")
 battle_state = NodePath("../Battle")
 
-[node name="Battle" type="Node" parent="StateMachine" node_paths=PackedStringArray("adventure_state")]
+[node name="Battle" type="Node" parent="StateMachine" node_paths=PackedStringArray("adventure_state", "ui_state")]
 script = ExtResource("5_tw6w4")
 adventure_state = NodePath("../Adventure")
+ui_state = NodePath("../UIState")
+
+[node name="UIState" type="Node" parent="StateMachine" node_paths=PackedStringArray("battle_state")]
+script = ExtResource("8_5o40l")
+battle_state = NodePath("../Battle")

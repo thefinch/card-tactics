@@ -1,5 +1,7 @@
 extends InputState
 
+class_name AdventureState
+
 # the state that manages battles
 @export
 var battle_state: State
