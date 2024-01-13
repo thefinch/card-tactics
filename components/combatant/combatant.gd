@@ -4,6 +4,19 @@ class_name Combatant
 
 signal turn_finished
 
+# the max distance this action allows movement
+@export
+var max_distance: int = 3
+
+# the actions this combatant can use
+var actions: Array
+
+# set the name so we can easily identify this thing
+func _ready():
+	var combatant_name = get_parent().scene_file_path.get_file().replace('.tscn', '')
+	combatant_name = 'combatant:' + combatant_name + ':' + str(get_instance_id())
+	self.name = combatant_name
+
 # a function we call before the turn begins
 var pre_turn_callback: Callable
 
@@ -46,7 +59,6 @@ func take_turn():
 		await pre_turn_callback.call()
 		
 	# end the turn if there's nothing to do
-	var actions = $Actions.get_children()
 	if actions.size() == 0:
 		prints('no actions so this turn is over')
 		turn_finished.emit()
@@ -60,7 +72,7 @@ func take_turn():
 	action.prepare()
 
 # adds an action that this combatant can choose on its turn
-func add_action(new_action: Action):
+func add_action(new_action: Action) -> void:
 	# set the supervisor so the action can ask for more info if needed
 	new_action.set_supervisor(self)
 	
@@ -77,4 +89,4 @@ func add_action(new_action: Action):
 	)
 	
 	# add to the list of actions that this combatant can choose from
-	$Actions.add_child(new_action)
+	actions.append(new_action)

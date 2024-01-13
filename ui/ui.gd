@@ -22,7 +22,7 @@ func get_action_menu() -> PopupMenu:
 	prints('action menu', action_menu)
 	return action_menu
 
-func select_target_position():
+func select_target_position(max_distance: float) -> void:
 	# @TODO need to get input handling here
 	# perhaps something that will enable input
 	# to be recieved in _input then continue processing?

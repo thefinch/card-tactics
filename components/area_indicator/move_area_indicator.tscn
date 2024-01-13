@@ -5,4 +5,5 @@
 [node name="Indicator" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
 mesh = ExtResource("1_nk5q1")

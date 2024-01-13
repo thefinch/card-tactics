@@ -38,7 +38,7 @@ func face_direction(direction):
 		parent.look_at(where_to_look, Vector3.UP)
 
 # make changes each frame
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	# drop back into idle if we're done moving
 	if parent.nav_agent.is_navigation_finished():
 		return idle_state

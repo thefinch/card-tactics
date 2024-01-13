@@ -5,6 +5,10 @@ class_name ControllableCombatant
 # 
 var menu: PopupMenu
 
+# this looks stupid but it makes things work
+func _ready():
+	pass
+
 # selects which combatant we want to target
 func select_target(action: Action):
 	# @TODO open up the UI to select a combatant
@@ -22,7 +26,7 @@ func select_target(action: Action):
 	
 func select_target_position():
 	# select the target from the UI
-	UI.select_target_position()
+	UI.select_target_position(self.max_distance)
 	var selected_target = await UI.target_position_selected 
 	prints('selected target position', selected_target)
 
@@ -36,9 +40,8 @@ func execute_selected_action(id):
 	var selected_action_label = menu.get_item_text(index)
 	
 	# find the action and execute it
-	var actions = $Actions.get_children()
-	prints('actions might be empty?', actions)
-	for action in actions:
+	prints('actions might be empty?', self.actions)
+	for action in self.actions:
 		prints('selected action: ', action.get_label())
 		if action.get_label() == selected_action_label:
 			prints('preparing the selected action', action.get_label())
@@ -51,15 +54,14 @@ func take_turn():
 		await pre_turn_callback.call()
 		
 	# end the turn if there's nothing to do
-	var actions = $Actions.get_children()
-	if actions.size() == 0:
+	if self.actions.size() == 0:
 		prints('no actions so this turn is over')
 		turn_finished.emit()
 		return
 	
 	# select an action with the UI
 	prints('selecting action from the menu')
-	UI.populate_action_menu(actions)
+	UI.populate_action_menu(self.actions)
 	menu = UI.get_action_menu()
 	menu.connect('id_pressed', execute_selected_action)
 	

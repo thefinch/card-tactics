@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://by8bdoujj0sb"]
+[gd_scene load_steps=11 format=3 uid="uid://by8bdoujj0sb"]
 
 [ext_resource type="Script" path="res://characters/character.gd" id="1_na0sd"]
 [ext_resource type="PackedScene" uid="uid://c3obpb38jr41" path="res://characters/elena/elena_model.tscn" id="2_vyw0m"]
 [ext_resource type="PackedScene" uid="uid://datg0pvj1dgho" path="res://components/combatant/Combatant.tscn" id="3_1bjyk"]
 [ext_resource type="Script" path="res://components/combatant/controllable.gd" id="4_luvkk"]
+[ext_resource type="Script" path="res://components/actions/attack/attack.gd" id="5_lw8ta"]
 [ext_resource type="Script" path="res://states/character/idle.gd" id="5_qji43"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="5_ud16e"]
 [ext_resource type="Script" path="res://states/character/walking.gd" id="6_1e1go"]
+[ext_resource type="Script" path="res://components/actions/move/move.gd" id="6_ptbb0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dkgv6"]
 height = 1.83279
@@ -28,6 +30,14 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="Combatant" parent="." groups=["controllable"] instance=ExtResource("3_1bjyk")]
 script = ExtResource("4_luvkk")
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="Attack" type="Node" parent="Actions"]
+script = ExtResource("5_lw8ta")
+
+[node name="Move" type="Node" parent="Actions"]
+script = ExtResource("6_ptbb0")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("5_ud16e")

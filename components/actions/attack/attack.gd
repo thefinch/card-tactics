@@ -1,4 +1,4 @@
-extends "../action.gd"
+extends Action
 
 class_name Attack
 

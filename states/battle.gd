@@ -4,6 +4,10 @@ extends InputState
 @export
 var adventure_state: State
 
+# the state that manages choices in the battle
+@export
+var ui_state: State
+
 # the combatants involved in the battle
 var combatants: Array = []
 
@@ -13,8 +17,18 @@ var turn_order
 # the combatant that is currently taking their turn
 var current_combatant: Combatant
 
-# run when the state is entered
+# keep tracke of 
+var battle_started: bool = false
+
+# start battle when we enter this state if it hasn't already been started
 func enter() -> void:
+	if not battle_started:
+		begin_battle()
+	
+func begin_battle() -> void:
+	# make sure we don't restart the battle when we come back into this state
+	battle_started = true
+	
 	# create a new battle manager
 	reset_combatants()
 	
@@ -92,6 +106,7 @@ func next_turn():
 	# break out if needed
 	if not any_controllable_characters_left() \
 		or combatants.size() < 2:
+		battle_started = false
 		return
 
 	# make a new turn order if everyone has taken their turn
@@ -111,7 +126,7 @@ func any_controllable_characters_left() -> bool:
 	
 	return false
 
-func process_frame(delta):
+func process_frame(_delta: float) -> State:
 	# end game when there are no controllable characters
 	if not any_controllable_characters_left():
 		prints('game is over')
@@ -121,3 +136,5 @@ func process_frame(delta):
 	if combatants.size() < 2:
 		prints('battle is over')
 		return adventure_state
+
+	return null

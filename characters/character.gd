@@ -3,13 +3,16 @@ class_name Character
 extends CharacterBody3D
 
 @onready
-var animation_player: AnimationPlayer = get_node('Model/AnimationPlayer')
+var animation_player: AnimationPlayer = $Model/AnimationPlayer
 
 @onready
-var nav_agent: NavigationAgent3D = get_node('NavigationAgent3D')
+var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
 @onready
-var state_machine = $StateMachine
+var state_machine: StateMachine = $StateMachine
+
+@onready
+var combatant: Combatant = $Combatant
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +20,10 @@ func _ready():
 	for label in animation_player.get_animation_list():
 		var anim = animation_player.get_animation(label)
 		anim.loop_mode = Animation.LOOP_LINEAR
+	
+	# add all actions to the combatant
+	for action in $Actions.get_children():
+		combatant.add_action(action)
 	
 	# setup the state machine
 	state_machine.init(self)

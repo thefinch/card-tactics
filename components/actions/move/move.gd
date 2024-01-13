@@ -1,9 +1,6 @@
-extends "../action.gd"
+extends Action
 
 class_name Move
-
-# the max distance this action allows movement
-@export var max_distance: int = 1
 
 # where we want to move
 var target

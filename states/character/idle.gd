@@ -10,7 +10,7 @@ func enter() -> void:
 	parent.change_animation('Idle')
 
 # if we have a new destination, change to the walking state
-func process_frame(delta: float) -> State:
+func process_frame(_delta: float) -> State:
 	if not parent.nav_agent.is_navigation_finished():
 		return walking_state
 

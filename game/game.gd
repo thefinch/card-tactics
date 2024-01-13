@@ -64,8 +64,12 @@ func place_destination_area_indicator(new_position: Vector3, normal: Vector3) ->
 func hide_destination_area_indicator():
 	destination_area_indicator.visible = false
 	
-func place_move_area_indicator(new_position):
+func place_move_area_indicator(new_position: Vector3) -> void:
 	move_area_indicator.position = new_position
+	
+func set_area_indicator_size(width: float) -> void:
+	width = width * 3
+	move_area_indicator.scale = Vector3(width, width, width)
 
 # load up the characters
 func load_character(character):
@@ -73,18 +77,6 @@ func load_character(character):
 	var loaded = load(character).instantiate()
 	var scene_name = loaded.scene_file_path.get_file().replace('.tscn', '')
 	loaded.name = scene_name
-	
-	# populate the actions for the combatant
-	var combatant = loaded.get_combatant()
-	combatant.name = 'combatant:' + scene_name
-	
-	# add the attack command
-	var attack = Attack.new()
-	combatant.add_action(attack)
-	
-	# add the move command
-	var move = Move.new()
-	combatant.add_action(move)
 	
 	# add the character to the scene
 	$Team.add_child(loaded)

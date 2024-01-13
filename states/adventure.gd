@@ -34,9 +34,10 @@ func process_input(event: InputEvent):
 			parent.get_active_character().set_target_position(hit.position)
 			parent.place_destination_area_indicator(hit.position, hit.normal)
 
-func process_frame(delta: float) -> State:
+func process_frame(_delta: float) -> State:
 	# place the movement ring around the active character
-	parent.place_move_area_indicator(parent.get_active_character().position + Vector3(0, 1, 0))
+	parent.set_area_indicator_size(3)
+	parent.place_move_area_indicator(parent.get_active_character().position + Vector3(0, 0.2, 0))
 	
 	# hide the area indicator when they're done walking
 	if parent.get_active_character().nav_agent.is_navigation_finished():
