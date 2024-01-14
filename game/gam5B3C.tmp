@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bi2srsicdbg3m"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_rn5rw"]
-[ext_resource type="Script" path="res://game/ui.gd" id="2_htowf"]
+[ext_resource type="Script" path="res://ui/ui.gd" id="2_dr4ch"]
 [ext_resource type="PackedScene" uid="uid://bqw5fu8gytho1" path="res://camera/camera_controller.tscn" id="2_sgppk"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_0cepn"]
 [ext_resource type="Script" path="res://states/adventure.gd" id="4_7avb2"]
@@ -12,12 +12,8 @@
 [node name="Game" type="Node3D"]
 script = ExtResource("1_rn5rw")
 
-[node name="UI" type="CanvasLayer" parent="."]
-script = ExtResource("2_htowf")
-
-[node name="Actions" type="PopupMenu" parent="UI"]
-hide_on_item_selection = false
-hide_on_checkable_item_selection = false
+[node name="UI" type="Node2D" parent="."]
+script = ExtResource("2_dr4ch")
 
 [node name="CameraController" parent="." instance=ExtResource("2_sgppk")]
 

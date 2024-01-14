@@ -6,10 +6,6 @@ class_name BattleState
 @export
 var adventure_state: State
 
-# the state that manages choices in the battle
-@export
-var ui_state: State
-
 # the combatants involved in the battle
 var combatants: Array = []
 
@@ -51,11 +47,6 @@ func begin_battle() -> void:
 	
 	# commence the fighting
 	next_turn()
-
-# wrapper around the parent's _process_input call
-func process_input(event: InputEvent):
-	# check for any zooming
-	super(event)
 
 # gets the list of combatants
 func get_combatants():
@@ -127,6 +118,11 @@ func any_controllable_characters_left() -> bool:
 			return true
 	
 	return false
+
+# wrapper around the parent's _process_input call
+func process_input(event: InputEvent):
+	# check for any zooming
+	super(event)
 
 func process_frame(_delta: float) -> State:
 	# end game when there are no controllable characters

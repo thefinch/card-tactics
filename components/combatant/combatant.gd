@@ -11,17 +11,17 @@ var max_distance: int = 3
 # the actions this combatant can use
 var actions: Array
 
-# set the name so we can easily identify this thing
-func _ready():
-	var combatant_name = get_parent().scene_file_path.get_file().replace('.tscn', '')
-	combatant_name = 'combatant:' + combatant_name + ':' + str(get_instance_id())
-	self.name = combatant_name
-
 # a function we call before the turn begins
 var pre_turn_callback: Callable
 
 # the state that we will interact with to pull info about the battle
 var battle_state: State
+
+# set the name so we can easily identify this thing
+func _ready():
+	var combatant_name = get_parent().scene_file_path.get_file().replace('.tscn', '')
+	combatant_name = 'combatant:' + combatant_name + ':' + str(get_instance_id())
+	self.name = combatant_name
 
 # sets the battle state that we will interact with
 func set_battle_state(new_battle_state: State) -> void:
@@ -45,10 +45,12 @@ func select_target(action: Action):
 	# !! @TODO in the future, we want to highlight options and require a click to select !!
 
 	return target
-	
+
+# selects a target position to move when move action is selected
 func select_target_position():
 	pass
 
+# sets a function to be called before selecting an action
 func set_pre_turn_callback(callback: Callable) -> void:
 	pre_turn_callback = callback
 

@@ -54,6 +54,7 @@ func process_frame(_delta: float) -> State:
 		# stop the character from moving
 		var active = parent.get_active_character()
 		active.set_target_position(active.position)
+		parent.hide_destination_area_indicator()
 		
 		return battle_state
 		

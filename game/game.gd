@@ -16,6 +16,10 @@ var destination_area_indicator = $DestinationAreaIndicator
 @onready
 var move_area_indicator = $MoveAreaIndicator
 
+# the UI that the player will interact with
+@onready
+var ui = $UI
+
 # the active character
 var active_character: Character
 
@@ -77,6 +81,9 @@ func load_character(character):
 	var loaded = load(character).instantiate()
 	var scene_name = loaded.scene_file_path.get_file().replace('.tscn', '')
 	loaded.name = scene_name
+	
+	# give the character access to the UI
+	loaded.get_combatant().set_ui(ui)
 	
 	# add the character to the scene
 	$Team.add_child(loaded)
