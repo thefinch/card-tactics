@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d15xfuqcr5uln"]
+
+[ext_resource type="Script" path="res://ui/ui.gd" id="1_3nt34"]
+[ext_resource type="PackedScene" uid="uid://ty5stjlmjgjk" path="res://components/area_indicator/area_indicator.tscn" id="1_mtu3k"]
+[ext_resource type="PackedScene" uid="uid://chcjww8ni523w" path="res://components/area_indicator/move_area_indicator.tscn" id="2_1bdgb"]
+
+[node name="UI" type="Node3D"]
+script = ExtResource("1_3nt34")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Actions" type="PopupMenu" parent="HUD"]
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+
+[node name="DestinationAreaIndicator" parent="." instance=ExtResource("1_mtu3k")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="MoveAreaIndicator" parent="." instance=ExtResource("2_1bdgb")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.65095, 0)

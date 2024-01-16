@@ -34,16 +34,16 @@ func process_input(event: InputEvent):
 		var hit = parent.get_camera().get_what_was_clicked()
 		if hit:
 			parent.get_active_character().set_target_position(hit.position)
-			parent.place_destination_area_indicator(hit.position, hit.normal)
+			parent.ui.place_destination_area_indicator(hit.position, hit.normal)
 
 func process_frame(_delta: float) -> State:
 	# place the movement ring around the active character
-	parent.set_area_indicator_size(3)
-	parent.place_move_area_indicator(parent.get_active_character().position + Vector3(0, 0.2, 0))
+	parent.ui.set_area_indicator_size(3)
+	parent.ui.place_move_area_indicator(parent.get_active_character().position + Vector3(0, 0.2, 0))
 	
 	# hide the area indicator when they're done walking
 	if parent.get_active_character().nav_agent.is_navigation_finished():
-		parent.hide_destination_area_indicator()
+		parent.ui.hide_destination_area_indicator()
 	
 	# switch to battle if we walked into a battle start area
 	if ready_for_battle:
@@ -54,7 +54,7 @@ func process_frame(_delta: float) -> State:
 		# stop the character from moving
 		var active = parent.get_active_character()
 		active.set_target_position(active.position)
-		parent.hide_destination_area_indicator()
+		parent.ui.hide_destination_area_indicator()
 		
 		return battle_state
 		

@@ -8,14 +8,6 @@ var camera = $CameraController
 @onready
 var state_machine = $StateMachine
 
-# an indicator for where something is going to happen
-@onready
-var destination_area_indicator = $DestinationAreaIndicator
-
-# an indicator for where the active character can move during their turn
-@onready
-var move_area_indicator = $MoveAreaIndicator
-
 # the UI that the player will interact with
 @onready
 var ui = $UI
@@ -57,23 +49,6 @@ func get_active_character() -> Character:
 func set_active_character(new_active: Character) -> void:
 	active_character = new_active
 	camera.set_active_target(active_character)
-
-# places an indicator at the given position
-func place_destination_area_indicator(new_position: Vector3, normal: Vector3) -> void:
-	destination_area_indicator.position = new_position
-	destination_area_indicator.rotation = normal
-	destination_area_indicator.visible = true
-	
-# hides the inidicator
-func hide_destination_area_indicator():
-	destination_area_indicator.visible = false
-	
-func place_move_area_indicator(new_position: Vector3) -> void:
-	move_area_indicator.position = new_position
-	
-func set_area_indicator_size(width: float) -> void:
-	width = width * 3
-	move_area_indicator.scale = Vector3(width, width, width)
 
 # load up the characters
 func load_character(character):

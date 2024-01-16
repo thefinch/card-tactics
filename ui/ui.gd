@@ -1,13 +1,21 @@
-extends CanvasLayer
+extends Node3D
 
 class_name UI
 
 # sent when a movement target is selected
 #signal target_position_selected(new_target_position)
 
+# an indicator for where something is going to happen
+@onready
+var destination_area_indicator = $DestinationAreaIndicator
+
+# an indicator for where the active character can move during their turn
+@onready
+var move_area_indicator = $MoveAreaIndicator
+
 # the menu that shows up when an action needs to be selected
 @onready
-var action_menu: PopupMenu = $Actions
+var action_menu: PopupMenu = $HUD/Actions
 
 var available_actions: Array = []
 
@@ -56,11 +64,7 @@ func populate_action_menu(actions: Array, call_when_selected: Callable):
 	prints('showing the menu', action_menu)
 	
 	await action_menu.id_pressed
-#
-#func get_action_menu() -> PopupMenu:
-	#prints('action menu', action_menu)
-	#return action_menu
-#
+
 #func select_target_position(max_distance: float) -> void:
 	## @TODO need to get input handling here
 	## perhaps something that will enable input
@@ -73,3 +77,20 @@ func populate_action_menu(actions: Array, call_when_selected: Callable):
 	### let things know that we selected a target
 	##target_position_selected.emit(target_position)
 	#pass
+
+# places an indicator at the given position
+func place_destination_area_indicator(new_position: Vector3, normal: Vector3) -> void:
+	destination_area_indicator.position = new_position
+	destination_area_indicator.rotation = normal
+	destination_area_indicator.visible = true
+	
+# hides the inidicator
+func hide_destination_area_indicator():
+	destination_area_indicator.visible = false
+	
+func place_move_area_indicator(new_position: Vector3) -> void:
+	move_area_indicator.position = new_position
+	
+func set_area_indicator_size(width: float) -> void:
+	width = width * 3
+	move_area_indicator.scale = Vector3(width, width, width)

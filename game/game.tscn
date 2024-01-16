@@ -1,23 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi2srsicdbg3m"]
+[gd_scene load_steps=7 format=3 uid="uid://bi2srsicdbg3m"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_rn5rw"]
-[ext_resource type="Script" path="res://game/ui.gd" id="2_htowf"]
+[ext_resource type="PackedScene" uid="uid://d15xfuqcr5uln" path="res://ui/ui.tscn" id="2_clngx"]
 [ext_resource type="PackedScene" uid="uid://bqw5fu8gytho1" path="res://camera/camera_controller.tscn" id="2_sgppk"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_0cepn"]
 [ext_resource type="Script" path="res://states/adventure.gd" id="4_7avb2"]
-[ext_resource type="PackedScene" uid="uid://chcjww8ni523w" path="res://components/area_indicator/move_area_indicator.tscn" id="4_eod88"]
-[ext_resource type="PackedScene" uid="uid://ty5stjlmjgjk" path="res://components/area_indicator/area_indicator.tscn" id="4_fp828"]
 [ext_resource type="Script" path="res://states/battle.gd" id="5_tw6w4"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_rn5rw")
 
-[node name="UI" type="CanvasLayer" parent="."]
-script = ExtResource("2_htowf")
-
-[node name="Actions" type="PopupMenu" parent="UI"]
-hide_on_item_selection = false
-hide_on_checkable_item_selection = false
+[node name="UI" parent="." instance=ExtResource("2_clngx")]
 
 [node name="CameraController" parent="." instance=ExtResource("2_sgppk")]
 
@@ -26,12 +19,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
 
 [node name="Enemies" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561203, 0)
-
-[node name="DestinationAreaIndicator" parent="." instance=ExtResource("4_fp828")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
-
-[node name="MoveAreaIndicator" parent="." instance=ExtResource("4_eod88")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.65095, 0)
 
 [node name="Map" type="Node3D" parent="."]
 
