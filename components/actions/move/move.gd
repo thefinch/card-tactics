@@ -17,7 +17,7 @@ func set_target(new_target: Vector3):
 func prepare():
 	# select the target
 	var selected_target = await supervisor.select_target_position()
-	set_target(selected_target)
+	#set_target(selected_target)
 	
 	# let things know that we're prepared to move
 	prepared.emit()

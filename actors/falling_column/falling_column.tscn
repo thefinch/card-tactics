@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=3 uid="uid://by8muw5ccihpv"]
+
+[ext_resource type="Script" path="res://actors/character.gd" id="1_usdnk"]
+[ext_resource type="PackedScene" uid="uid://datg0pvj1dgho" path="res://components/combatant/Combatant.tscn" id="2_icira"]
+[ext_resource type="Script" path="res://components/actions/attack/attack.gd" id="3_oo72k"]
+[ext_resource type="Script" path="res://components/actions/move/move.gd" id="4_3yaba"]
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="5_1gn63"]
+[ext_resource type="Script" path="res://states/character/idle.gd" id="6_wn42k"]
+[ext_resource type="Script" path="res://states/character/walking.gd" id="7_vdhsn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vymuk"]
+height = 1.83279
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_utmu5"]
+
+[sub_resource type="Animation" id="Animation_uoy8x"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_0tkah"]
+resource_name = "walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mcwnq"]
+_data = {
+"idle": SubResource("Animation_uoy8x"),
+"walk": SubResource("Animation_0tkah")
+}
+
+[node name="falling_column" type="CharacterBody3D"]
+script = ExtResource("1_usdnk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.880476, 0)
+shape = SubResource("CapsuleShape3D_vymuk")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+
+[node name="Model" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Model"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/StaticBody3D"]
+shape = SubResource("CylinderShape3D_utmu5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Model"]
+libraries = {
+"": SubResource("AnimationLibrary_mcwnq")
+}
+
+[node name="Combatant" parent="." groups=["enemy"] instance=ExtResource("2_icira")]
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="Attack" type="Node" parent="Actions"]
+script = ExtResource("3_oo72k")
+
+[node name="Move" type="Node" parent="Actions"]
+script = ExtResource("4_3yaba")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("5_1gn63")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("walking_state")]
+script = ExtResource("6_wn42k")
+walking_state = NodePath("../Walking")
+
+[node name="Walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("7_vdhsn")
+idle_state = NodePath("../Idle")
+move_speed = 10

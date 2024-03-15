@@ -13,6 +13,10 @@ var destination_area_indicator = $DestinationAreaIndicator
 @onready
 var move_area_indicator = $MoveAreaIndicator
 
+# an indicator to show which character is active
+@onready
+var active_indicator = $ActiveIndicator
+
 # the menu that shows up when an action needs to be selected
 @onready
 var action_menu: PopupMenu = $HUD/Actions
@@ -92,5 +96,10 @@ func place_move_area_indicator(new_position: Vector3) -> void:
 	move_area_indicator.position = new_position
 	
 func set_area_indicator_size(width: float) -> void:
-	width = width * 3
 	move_area_indicator.scale = Vector3(width, width, width)
+	
+func place_active_indicator(new_position: Vector3) -> void:
+	active_indicator.position = new_position
+	
+func set_active_indicator_size(width: float) -> void:
+	active_indicator.scale = Vector3(width, width, width)

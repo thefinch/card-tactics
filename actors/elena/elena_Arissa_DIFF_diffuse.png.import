@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmbtp63hd38b5"
-path.s3tc="res://.godot/imported/elena_Arissa_DIFF_diffuse.png-e4ab571174ced9f2deb50fa8961ff906.s3tc.ctex"
+path.s3tc="res://.godot/imported/elena_Arissa_DIFF_diffuse.png-149c66af89dabb3e4106fa2b860e4b57.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://characters/elena/elena_Arissa_DIFF_diffuse.png"
-dest_files=["res://.godot/imported/elena_Arissa_DIFF_diffuse.png-e4ab571174ced9f2deb50fa8961ff906.s3tc.ctex"]
+source_file="res://actors/elena/elena_Arissa_DIFF_diffuse.png"
+dest_files=["res://.godot/imported/elena_Arissa_DIFF_diffuse.png-149c66af89dabb3e4106fa2b860e4b57.s3tc.ctex"]
 
 [params]
 

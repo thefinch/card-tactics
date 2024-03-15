@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cp6fdw2bgvjj2"
-path="res://.godot/imported/elena.glb-34649003dcc9569acab46956877b0028.scn"
+path="res://.godot/imported/elena.glb-6fe2d379d21b55040557f857c793542f.scn"
 
 [deps]
 
-source_file="res://characters/elena/elena.glb"
-dest_files=["res://.godot/imported/elena.glb-34649003dcc9569acab46956877b0028.scn"]
+source_file="res://actors/elena/elena.glb"
+dest_files=["res://.godot/imported/elena.glb-6fe2d379d21b55040557f857c793542f.scn"]
 
 [params]
 
@@ -32,9 +32,9 @@ import_script/path=""
 _subresources={
 "animations": {
 "Idle": {
-"save_to_file/enabled": false,
+"save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "",
+"save_to_file/path": "res://actors/elena/Idle.res",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -1831,9 +1831,9 @@ _subresources={
 "slices/amount": null
 },
 "Walk": {
-"save_to_file/enabled": false,
+"save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "",
+"save_to_file/path": "res://actors/elena/Walk.res",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

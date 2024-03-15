@@ -18,10 +18,10 @@ var pre_turn_callback: Callable
 var battle_state: State
 
 # set the name so we can easily identify this thing
-func _ready():
-	var combatant_name = get_parent().scene_file_path.get_file().replace('.tscn', '')
-	combatant_name = 'combatant:' + combatant_name + ':' + str(get_instance_id())
-	self.name = combatant_name
+#func _ready():
+	#var combatant_name = get_parent().scene_file_path.get_file().replace('.tscn', '')
+	#combatant_name = 'combatant:' + combatant_name + ':' + str(get_instance_id())
+	#self.name = combatant_name
 
 # sets the battle state that we will interact with
 func set_battle_state(new_battle_state: State) -> void:

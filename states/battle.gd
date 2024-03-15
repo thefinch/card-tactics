@@ -40,7 +40,7 @@ func begin_battle() -> void:
 	for combatant in all_combatants:
 		combatant.set_pre_turn_callback(func():
 			print('running pre-turn callback')
-			parent.get_camera().set_active_target(combatant)
+			parent.set_active_character(combatant.get_parent())
 		)
 		if !combatant.is_in_group('controllable'):
 			add_combatant(combatant)

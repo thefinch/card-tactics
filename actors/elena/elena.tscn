@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://by8bdoujj0sb"]
 
-[ext_resource type="Script" path="res://characters/character.gd" id="1_na0sd"]
-[ext_resource type="PackedScene" uid="uid://c3obpb38jr41" path="res://characters/elena/elena_model.tscn" id="2_vyw0m"]
+[ext_resource type="Script" path="res://actors/character.gd" id="1_753ji"]
+[ext_resource type="PackedScene" uid="uid://c3obpb38jr41" path="res://actors/elena/elena_model.tscn" id="2_vyw0m"]
 [ext_resource type="PackedScene" uid="uid://datg0pvj1dgho" path="res://components/combatant/Combatant.tscn" id="3_1bjyk"]
 [ext_resource type="Script" path="res://components/combatant/controllable.gd" id="4_luvkk"]
 [ext_resource type="Script" path="res://components/actions/attack/attack.gd" id="5_lw8ta"]
@@ -15,7 +15,7 @@ height = 1.83279
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 floor_max_angle = 1.0472
-script = ExtResource("1_na0sd")
+script = ExtResource("1_753ji")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.880476, 0)

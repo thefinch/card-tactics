@@ -32,6 +32,7 @@ func select_target_position():
 	ui.select_target_position(self.max_distance)
 	var selected_target = await ui.target_position_selected 
 	prints('selected target position', selected_target)
+	return selected_target
 
 func execute_selected_action(id):
 	print('hiding the menu')

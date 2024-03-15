@@ -36,15 +36,13 @@ func _process(delta):
 		Vector3(active_target.global_position.x, new_y, global_position.z),
 		delta * zoom_speed
 	)
+	
 	camera.size = height
 
 # initiates a zoom in or out
 func zoom(height_change: int):
 	height += height_change
-	if height > max_height:
-		height = max_height
-	if height < min_height:
-		height = min_height
+	height = clampi(height, min_height, max_height)
 
 func set_active_target(new_active_target):
 	active_target = new_active_target
