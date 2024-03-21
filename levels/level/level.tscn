@@ -368,16 +368,16 @@ size = Vector3(1, 6.74758, 1)
 shape = SubResource("BoxShape3D_6seql")
 
 [node name="BackRightFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_sligj")]
-transform = Transform3D(3, 0, 0, 0, 10, 0, 0, 0, 3, 26.124, 0, 18.5)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 26.124, 0, 18.5)
 
 [node name="BackLeftFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_sligj")]
-transform = Transform3D(3, 0, 0, 0, 10, 0, 0, 0, 3, 26.124, 0, -19.1647)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 26.124, 0, -19.1647)
 
 [node name="TopRightFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_sligj")]
-transform = Transform3D(3, 0, 0, 0, 10, 0, 0, 0, 3, -52.1421, 0, 18.5)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -52.1421, 0, 18.5)
 
 [node name="TopLeftFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_sligj")]
-transform = Transform3D(3, 0, 0, 0, 10, 0, 0, 0, 3, -52.1421, 0, -19.1647)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -52.1421, 0, -19.1647)
 
 [node name="bridge" parent="NavigationRegion3D" instance=ExtResource("4_18u52")]
 transform = Transform3D(-9.99437, 0, 0.335564, 0, 4, 0, -0.335564, 0, -9.99437, -19.3994, 0.605195, 9.83502)

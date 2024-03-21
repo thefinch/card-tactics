@@ -29,7 +29,7 @@ func select_target(action: Action):
 	
 func select_target_position():
 	# select the target from the UI
-	ui.select_target_position(self.max_distance)
+	ui.select_target_position(get_parent(), self.max_distance)
 	var selected_target = await ui.target_position_selected 
 	prints('selected target position', selected_target)
 	return selected_target

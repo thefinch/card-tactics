@@ -69,7 +69,11 @@ func populate_action_menu(actions: Array, call_when_selected: Callable):
 	
 	await action_menu.id_pressed
 
-#func select_target_position(max_distance: float) -> void:
+func select_target_position(character: Character, max_distance: float) -> void:
+	# place the movement ring around the active character
+	set_move_area_indicator_size(max_distance)
+	place_move_area_indicator(character.position + Vector3(0, 0.2, 0))
+	
 	## @TODO need to get input handling here
 	## perhaps something that will enable input
 	## to be recieved in _input then continue processing?
@@ -88,18 +92,30 @@ func place_destination_area_indicator(new_position: Vector3, normal: Vector3) ->
 	destination_area_indicator.rotation = normal
 	destination_area_indicator.visible = true
 	
-# hides the inidicator
+# hides the indicator for where the character is moving
 func hide_destination_area_indicator():
 	destination_area_indicator.visible = false
 	
+# hides the indicator for where the character can move
+func hide_move_area_indicator():
+	move_area_indicator.visible = false
+
+# moves the move area indicator to the new position
 func place_move_area_indicator(new_position: Vector3) -> void:
 	move_area_indicator.position = new_position
-	
-func set_area_indicator_size(width: float) -> void:
+
+# changes the size of the move area indicator
+func set_move_area_indicator_size(width: float) -> void:
 	move_area_indicator.scale = Vector3(width, width, width)
-	
+
+# hides the indicactor for which character is active
+func hide_active_indicator():
+	active_indicator.visible = false
+
+# moves the active indicator to the new position
 func place_active_indicator(new_position: Vector3) -> void:
-	active_indicator.position = new_position
-	
+	active_indicator.global_position = new_position
+
+# changes the size of the active indicator
 func set_active_indicator_size(width: float) -> void:
 	active_indicator.scale = Vector3(width, width, width)

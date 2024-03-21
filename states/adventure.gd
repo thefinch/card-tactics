@@ -10,6 +10,11 @@ var battle_state: State
 var ready_for_battle: bool = false
 
 func enter() -> void:
+	# make sure the indicators are hidden
+	parent.ui.hide_move_area_indicator()
+	parent.ui.hide_destination_area_indicator()
+	parent.ui.hide_active_indicator()
+	
 	# make sure all battle start areas start battle appropriately
 	var all_battle_starters = get_tree().get_nodes_in_group('battle_starter')
 	for starter:Area3D in all_battle_starters:
@@ -37,10 +42,6 @@ func process_input(event: InputEvent):
 			parent.ui.place_destination_area_indicator(hit.position, hit.normal)
 
 func process_frame(_delta: float) -> State:
-	# place the movement ring around the active character
-	#parent.ui.set_area_indicator_size(3)
-	#parent.ui.place_move_area_indicator(parent.get_active_character().position + Vector3(0, 0.2, 0))
-	
 	# hide the area indicator when they're done walking
 	if parent.get_active_character().nav_agent.is_navigation_finished():
 		parent.ui.hide_destination_area_indicator()

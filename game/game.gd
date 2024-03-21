@@ -78,5 +78,5 @@ func _process(delta: float) -> void:
 	
 	# place the active indicator around the active character
 	if state_machine.current_state is BattleState:
-		ui.set_active_indicator_size(2)
-		ui.place_active_indicator(active_character.position + Vector3(0, 1, 0))
+		ui.set_active_indicator_size(3)
+		ui.place_active_indicator(active_character.global_position + Vector3(0, 1, 0))

@@ -11,9 +11,6 @@ var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready
 var combatant: Combatant = $Combatant
 
-@onready
-var actions = $Actions
-
 func _ready():
 	super._ready()
 	
@@ -23,8 +20,9 @@ func _ready():
 		anim.loop_mode = Animation.LOOP_LINEAR
 	
 	# add all actions to the combatant
-	for action in actions.get_children():
-		combatant.add_action(action)
+	for child in combatant.get_children():
+		if child is Action:
+			combatant.add_action(child)
 
 # switches to the provided animation
 func change_animation(label):
