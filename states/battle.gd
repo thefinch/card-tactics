@@ -74,6 +74,12 @@ func add_combatant(new_combatant: Combatant):
 	
 	# making the combatant start the next turn when theirs is done
 	new_combatant.turn_finished.connect(func():
+		# break out if needed
+		if not any_controllable_characters_left() \
+			or combatants.size() < 2:
+			battle_started = false
+			return
+		
 		# wait before the next turn starts
 		prints('waiting for the next turn to start')
 		await get_tree().create_timer(3.0).timeout
@@ -96,12 +102,6 @@ func remove_combatant(no_longer_fighting: Combatant):
 func next_turn():
 	prints('\ntaking next turn\n')
 	
-	# break out if needed
-	if not any_controllable_characters_left() \
-		or combatants.size() < 2:
-		battle_started = false
-		return
-
 	# make a new turn order if everyone has taken their turn
 	if turn_order.is_empty():
 		make_new_turn_order()

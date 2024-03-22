@@ -15,6 +15,9 @@ var ui = $UI
 # the active character
 var active_character: Character
 
+# a reference to our main character
+var elena
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_level()
@@ -32,7 +35,7 @@ func load_level() -> void:
 func load_actors() -> void:
 	# load up the characters
 	var elena_scene = "res://actors/elena/elena.tscn"
-	var elena = load_actor(elena_scene)
+	elena = load_actor(elena_scene)
 	
 	# let the manager know what it needs to know
 	set_active_character(elena)
@@ -80,3 +83,6 @@ func _process(delta: float) -> void:
 	if state_machine.current_state is BattleState:
 		ui.set_active_indicator_size(3)
 		ui.place_active_indicator(active_character.global_position + Vector3(0, 1, 0))
+	elif state_machine.current_state is AdventureState \
+		and active_character != elena:
+		set_active_character(elena)
