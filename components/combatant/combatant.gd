@@ -8,6 +8,9 @@ signal turn_finished
 @export
 var max_distance: int = 3
 
+@export
+var max_health: int = 1
+
 # the actions this combatant can use
 var actions: Array
 
@@ -18,10 +21,19 @@ var pre_turn_callback: Callable
 var battle_state: State
 
 # set the name so we can easily identify this thing
-#func _ready():
-	#var combatant_name = get_parent().scene_file_path.get_file().replace('.tscn', '')
-	#combatant_name = 'combatant:' + combatant_name + ':' + str(get_instance_id())
-	#self.name = combatant_name
+func _ready():
+	prints('max health before', max_health, 'for ', get_nice_name())
+	max_heal()
+	prints('max health after', get_health_manager().get_health(), 'for ', get_nice_name())
+
+func max_heal():
+	get_health_manager().set_max_health(max_health)
+	get_health_manager().set_current_health(max_health)
+
+func get_nice_name():
+	var combatant_name = get_parent().scene_file_path.get_file().replace('.tscn', '')
+	combatant_name = 'combatant:' + combatant_name + ':' + str(get_instance_id())
+	return combatant_name
 
 # sets the battle state that we will interact with
 func set_battle_state(new_battle_state: State) -> void:
@@ -41,7 +53,7 @@ func select_target(action: Action):
 	# !! for testing we don't want to select ourself !!
 	combatants.erase(self)
 	var target = combatants.pick_random()
-	prints('selected target', target)
+	prints('selected target', target.get_nice_name(), 'target health', target.get_health_manager().get_health())
 	# !! @TODO in the future, we want to highlight options and require a click to select !!
 
 	return target

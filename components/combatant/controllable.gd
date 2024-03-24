@@ -2,12 +2,12 @@ extends Combatant
 
 class_name ControllableCombatant
 
-# 
+# a reference to the UI
 var ui
 
 # this looks stupid but it makes things work
 func _ready():
-	pass
+	super._ready()
 
 func set_ui(new_ui):
 	ui = new_ui
@@ -22,7 +22,7 @@ func select_target(action: Action):
 	# !! for testing we don't want to select ourself !!
 	combatants.erase(self)
 	var target = combatants.pick_random()
-	prints('selected target', target)
+	prints('selected target', target.get_nice_name())
 	# !! @TODO in the future, we want to highlight options and require a click to select !!
 
 	return target

@@ -68,7 +68,7 @@ func add_combatant(new_combatant: Combatant):
 	
 	# make the combatant remove themself from the turn order when they die
 	new_combatant.get_health_manager().dead.connect(func():
-		prints('removing combatant because it died', new_combatant)
+		prints('removing combatant because it died', new_combatant.get_nice_name())
 		remove_combatant(new_combatant)
 	)
 	
@@ -105,7 +105,7 @@ func next_turn():
 	
 	# make the next combatant take their turn
 	current_combatant = turn_order.pop_front()
-	prints('current combatant taking turn', current_combatant)
+	prints('current combatant taking turn', current_combatant.get_nice_name())
 	current_combatant.take_turn()
 
 # check if there are any controllable combatants left
@@ -131,6 +131,7 @@ func process_frame(_delta: float) -> State:
 	# end combat when no one is around to fight
 	if combatants.size() < 2:
 		prints('battle is over')
+		parent.get_ui().show_battle_over()
 		return adventure_state
 
 	return null

@@ -19,7 +19,13 @@ signal healed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_health = max_health
+	set_current_health(max_health)
+
+func set_max_health(new_max_health):
+	max_health = new_max_health
+	
+func set_current_health(new_current_health):
+	current_health = new_current_health
 
 # gets the current health
 func get_health():

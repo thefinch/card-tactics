@@ -124,3 +124,8 @@ func set_active_indicator_size(width: float) -> void:
 func show_game_over():
 	var game_over = load("res://ui/game_over/game_over.tscn").instantiate()
 	add_child(game_over)
+
+# shows battle over screen
+func show_battle_over():
+	var battle_over = load("res://ui/battle_over/battle_over.tscn").instantiate()
+	add_child(battle_over)
