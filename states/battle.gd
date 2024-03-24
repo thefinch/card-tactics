@@ -15,7 +15,7 @@ var turn_order
 # the combatant that is currently taking their turn
 var current_combatant: Combatant
 
-# keep tracke of 
+# keep track of whether or not we're in a battle
 var battle_started: bool = false
 
 # start battle when we enter this state if it hasn't already been started
@@ -81,15 +81,12 @@ func add_combatant(new_combatant: Combatant):
 			return
 		
 		# wait before the next turn starts
-		prints('waiting for the next turn to start')
 		await get_tree().create_timer(3.0).timeout
-		prints('starting the next turn')
 		
 		# take the next turn
 		next_turn()
 	)
 	
-	prints('adding combatant to list', new_combatant.name)
 	combatants.append(new_combatant)
 	make_new_turn_order()
 
@@ -128,6 +125,7 @@ func process_frame(_delta: float) -> State:
 	# end game when there are no controllable characters
 	if not any_controllable_characters_left():
 		prints('game is over')
+		parent.get_ui().show_game_over()
 		return adventure_state
 	
 	# end combat when no one is around to fight

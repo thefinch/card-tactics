@@ -44,6 +44,9 @@ func load_actors() -> void:
 func get_camera():
 	return camera
 
+func get_ui():
+	return ui
+
 # gets the active character
 func get_active_character() -> Character:
 	return active_character

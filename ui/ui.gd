@@ -119,3 +119,8 @@ func place_active_indicator(new_position: Vector3) -> void:
 # changes the size of the active indicator
 func set_active_indicator_size(width: float) -> void:
 	active_indicator.scale = Vector3(width, width, width)
+
+# shows the game over screen
+func show_game_over():
+	var game_over = load("res://ui/game_over/game_over.tscn").instantiate()
+	add_child(game_over)
