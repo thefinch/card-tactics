@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://by8muw5ccihpv"]
+[gd_scene load_steps=13 format=3 uid="uid://by8muw5ccihpv"]
 
 [ext_resource type="Script" path="res://actors/character.gd" id="1_usdnk"]
 [ext_resource type="PackedScene" uid="uid://datg0pvj1dgho" path="res://components/combatant/Combatant.tscn" id="2_icira"]
 [ext_resource type="Script" path="res://components/actions/attack/attack.gd" id="3_oo72k"]
+[ext_resource type="Script" path="res://states/character/death.gd" id="4_od0wm"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="5_1gn63"]
 [ext_resource type="Script" path="res://states/character/idle.gd" id="6_wn42k"]
 [ext_resource type="Script" path="res://states/character/walking.gd" id="7_vdhsn"]
@@ -57,11 +58,15 @@ script = ExtResource("3_oo72k")
 script = ExtResource("5_1gn63")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("walking_state")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("walking_state", "death_state")]
 script = ExtResource("6_wn42k")
 walking_state = NodePath("../Walking")
+death_state = NodePath("../DeathState")
 
 [node name="Walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("7_vdhsn")
 idle_state = NodePath("../Idle")
 move_speed = 10
+
+[node name="DeathState" type="Node" parent="StateMachine"]
+script = ExtResource("4_od0wm")

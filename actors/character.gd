@@ -31,9 +31,12 @@ func change_animation(label):
 		'Idle': 'Armature',
 		'Walk': 'Armature_001'
 	}
+	if not map.has(label):
+		prints('requested animation "' + label + '" and it does not exist in the map')
+		return
 	var requested = get_node_or_null('Model/' + map[label])
 	if not requested:
-		prints('requested animation "' + label + '" and it does not exist')
+		prints('requested animation "' + label + '" and it does not exist as an animation')
 		return
 	
 	# hide all the other animations
@@ -55,3 +58,7 @@ func set_target_position(new_position: Vector3):
 # gets the combantant for this character
 func get_combatant():
 	return $Combatant
+
+# checks if this character is dead
+func is_dead():
+	return $Combatant.get_health_manager().get_health() < 1

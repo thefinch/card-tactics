@@ -22,7 +22,18 @@ var battle_started: bool = false
 func enter() -> void:
 	if not battle_started:
 		begin_battle()
-	
+
+# cleanup everything after the battle ends
+func exit() -> void:
+	# heal all controllable combatants
+	var all_combatants = get_tree().get_nodes_in_group('combatant')
+	for combatant in all_combatants:
+		if combatant.is_in_group('controllable'):
+			var manager = combatant.get_health_manager()
+			var max_health = manager.get_max_health()
+			manager.set_current_health(max_health)
+
+# creates a turn order and starts the first turn
 func begin_battle() -> void:
 	# make sure we don't restart the battle when we come back into this state
 	battle_started = true
@@ -121,6 +132,7 @@ func process_input(event: InputEvent):
 	# check for any zooming
 	super(event)
 
+# wrapper around the parent's process_frame call
 func process_frame(_delta: float) -> State:
 	# end game when there are no controllable characters
 	if not any_controllable_characters_left():

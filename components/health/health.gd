@@ -21,15 +21,21 @@ signal healed
 func _ready():
 	set_current_health(max_health)
 
+# sets the max health this can have
 func set_max_health(new_max_health):
 	max_health = new_max_health
-	
+
+# sets the current health
 func set_current_health(new_current_health):
 	current_health = new_current_health
 
 # gets the current health
 func get_health():
 	return current_health
+
+# gets the max health
+func get_max_health():
+	return max_health
 
 # decreases current health by given amount of damage
 func deal_damage(damage: int):
