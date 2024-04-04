@@ -22,6 +22,11 @@ var battle_started: bool = false
 func enter() -> void:
 	if not battle_started:
 		begin_battle()
+		
+	# show all health bars
+	var all_combatants = get_tree().get_nodes_in_group('combatant')
+	for combatant in all_combatants:
+		combatant.show_health_bar()
 
 # cleanup everything after the battle ends
 func exit() -> void:
@@ -29,9 +34,7 @@ func exit() -> void:
 	var all_combatants = get_tree().get_nodes_in_group('combatant')
 	for combatant in all_combatants:
 		if combatant.is_in_group('controllable'):
-			var manager = combatant.get_health_manager()
-			var max_health = manager.get_max_health()
-			manager.set_current_health(max_health)
+			combatant.max_heal()
 
 # creates a turn order and starts the first turn
 func begin_battle() -> void:

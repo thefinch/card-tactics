@@ -15,6 +15,11 @@ func enter() -> void:
 	parent.ui.hide_destination_area_indicator()
 	parent.ui.hide_active_indicator()
 	
+	# make sure health bars are hidden
+	var all_combatants = get_tree().get_nodes_in_group('combatant')
+	for combatant in all_combatants:
+		combatant.hide_health_bar()
+	
 	# make sure all battle start areas start battle appropriately
 	var all_battle_starters = get_tree().get_nodes_in_group('battle_starter')
 	for starter:Area3D in all_battle_starters:

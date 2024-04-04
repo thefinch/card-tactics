@@ -1,9 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://datg0pvj1dgho"]
+[gd_scene load_steps=6 format=3 uid="uid://datg0pvj1dgho"]
 
 [ext_resource type="Script" path="res://components/combatant/combatant.gd" id="1_ca0ss"]
-[ext_resource type="PackedScene" uid="uid://bmavfcvqejp0m" path="res://components/health/Health.tscn" id="1_xlm4o"]
+[ext_resource type="Script" path="res://components/combatant/health.gd" id="2_n3c15"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ydkdd"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gc22f"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fa4l5"]
+bg_color = Color(0, 0.713726, 0.431373, 1)
 
 [node name="Combatant" type="Node3D" groups=["combatant"]]
 script = ExtResource("1_ca0ss")
 
-[node name="Health" parent="." instance=ExtResource("1_xlm4o")]
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = SubResource("ViewportTexture_ydkdd")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(256, 256)
+
+[node name="Health" type="ProgressBar" parent="SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_gc22f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fa4l5")
+show_percentage = false
+script = ExtResource("2_n3c15")

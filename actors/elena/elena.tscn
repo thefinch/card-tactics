@@ -30,7 +30,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="Combatant" parent="." groups=["controllable"] instance=ExtResource("3_1bjyk")]
 script = ExtResource("4_luvkk")
-max_distance = null
 max_health = 10
 
 [node name="Attack" type="Node" parent="Combatant"]

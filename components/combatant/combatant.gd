@@ -4,10 +4,14 @@ class_name Combatant
 
 signal turn_finished
 
+@onready
+var health_bar = $Sprite3D
+
 # the max distance this action allows movement
 @export
 var max_distance: int = 3
 
+# the maximum health this can have
 @export
 var max_health: int = 1
 
@@ -26,10 +30,24 @@ func _ready():
 	max_heal()
 	prints('max health after', get_health_manager().get_health(), 'for ', get_nice_name())
 
+# position the health bar above the parent
+func _process(_nope:float) -> void:
+	health_bar.global_position = get_parent().global_position + Vector3(0, 7, 0)
+
+# hides the health bar
+func hide_health_bar():
+	health_bar.visible = false
+
+# shows the health bar
+func show_health_bar():
+	health_bar.visible = true
+
+# fully heals the combatant
 func max_heal():
 	get_health_manager().set_max_health(max_health)
 	get_health_manager().set_current_health(max_health)
 
+# creates a readable name for us to see during debugging
 func get_nice_name():
 	var combatant_name = get_parent().scene_file_path.get_file().replace('.tscn', '')
 	combatant_name = 'combatant:' + combatant_name + ':' + str(get_instance_id())
@@ -41,7 +59,7 @@ func set_battle_state(new_battle_state: State) -> void:
 
 # gets the health manager
 func get_health_manager() -> Health:
-	return $Health
+	return %Health
 
 # selects which combatant we want to target
 func select_target(action: Action):
