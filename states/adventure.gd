@@ -36,6 +36,27 @@ func process_input(event: InputEvent):
 	# check for any zooming
 	super(event)
 	
+	# see if we are using our directional buttons
+	var direction_pressed = Input.is_action_pressed('ui_left') \
+		or Input.is_action_pressed('ui_right') \
+		or Input.is_action_pressed('ui_up') \
+		or Input.is_action_pressed('ui_down')
+	if direction_pressed:
+		# figure out the new position
+		var new_position = parent.get_active_character().position
+		var movement_amount = 2
+		if Input.is_action_pressed('ui_left'):
+			new_position += Vector3(-movement_amount, 0, 0)
+		if Input.is_action_pressed('ui_right'):
+			new_position += Vector3(movement_amount, 0, 0)
+		if Input.is_action_pressed('ui_up'):
+			new_position += Vector3(0, 0, -movement_amount)
+		if Input.is_action_pressed('ui_down'):
+			new_position += Vector3(0, 0, movement_amount)
+		
+		# set the new position
+		parent.get_active_character().set_target_position(new_position)
+	
 	# see if we need to click around and move anywhere
 	var clicked = event is InputEventMouseButton \
 		and event.button_index == MOUSE_BUTTON_LEFT \
