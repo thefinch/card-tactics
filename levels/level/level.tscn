@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://ouiftrn1js4i"]
+[gd_scene load_steps=8 format=3 uid="uid://ouiftrn1js4i"]
 
-[ext_resource type="PackedScene" uid="uid://by8muw5ccihpv" path="res://actors/falling_column/falling_column.tscn" id="3_sligj"]
 [ext_resource type="PackedScene" uid="uid://d2f6uufqbb33c" path="res://levels/components/bridge.tscn" id="4_18u52"]
 [ext_resource type="Material" uid="uid://d2ao4vti8qjxi" path="res://materials/light_grey.tres" id="4_oqrna"]
 [ext_resource type="Material" uid="uid://dvu1sqg5uqjw8" path="res://materials/light_brown.tres" id="5_cmlna"]
@@ -366,18 +365,6 @@ size = Vector3(1, 6.74758, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RightColumns/Obstacle16/StaticBody3D"]
 shape = SubResource("BoxShape3D_6seql")
-
-[node name="BackRightFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_sligj")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 26.124, 0, 18.5)
-
-[node name="BackLeftFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_sligj")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 26.124, 0, -19.1647)
-
-[node name="TopRightFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_sligj")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -52.1421, 0, 18.5)
-
-[node name="TopLeftFallingColumn" parent="NavigationRegion3D" instance=ExtResource("3_sligj")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -52.1421, 0, -19.1647)
 
 [node name="bridge" parent="NavigationRegion3D" instance=ExtResource("4_18u52")]
 transform = Transform3D(-9.99437, 0, 0.335564, 0, 4, 0, -0.335564, 0, -9.99437, -19.3994, 0.605195, 9.83502)

@@ -1,25 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://by8bdoujj0sb"]
+[gd_scene load_steps=7 format=3 uid="uid://b3li84nkyl1jq"]
 
-[ext_resource type="Script" path="res://actors/character.gd" id="1_753ji"]
+[ext_resource type="Script" path="res://actors/controllable.gd" id="1_fscx0"]
 [ext_resource type="PackedScene" uid="uid://c3obpb38jr41" path="res://actors/elena/elena_model.tscn" id="2_vyw0m"]
-[ext_resource type="PackedScene" uid="uid://datg0pvj1dgho" path="res://components/combatant/Combatant.tscn" id="3_1bjyk"]
-[ext_resource type="Script" path="res://components/combatant/controllable.gd" id="4_luvkk"]
+[ext_resource type="PackedScene" uid="uid://tqkf612h8yty" path="res://state_machine/character_state_machine.tscn" id="3_aqn50"]
 [ext_resource type="Script" path="res://components/actions/attack/attack.gd" id="5_lw8ta"]
-[ext_resource type="Script" path="res://states/character/idle.gd" id="5_qji43"]
-[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="5_ud16e"]
-[ext_resource type="Script" path="res://states/character/walking.gd" id="6_1e1go"]
-[ext_resource type="Script" path="res://states/character/death.gd" id="9_u5ld8"]
+[ext_resource type="PackedScene" uid="uid://datg0pvj1dgho" path="res://components/health_bar/health_bar.tscn" id="8_ttetl"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dkgv6"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xvis7"]
 height = 1.83279
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
-floor_max_angle = 1.0472
-script = ExtResource("1_753ji")
+[node name="ControllableCombatant" type="CharacterBody3D"]
+script = ExtResource("1_fscx0")
+move_speed = 12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.880476, 0)
-shape = SubResource("CapsuleShape3D_dkgv6")
+shape = SubResource("CapsuleShape3D_xvis7")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.1
@@ -28,26 +24,9 @@ target_desired_distance = 0.1
 [node name="Model" parent="." instance=ExtResource("2_vyw0m")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="Combatant" parent="." groups=["controllable"] instance=ExtResource("3_1bjyk")]
-script = ExtResource("4_luvkk")
-max_health = 10
+[node name="StateMachine" parent="." instance=ExtResource("3_aqn50")]
 
-[node name="Attack" type="Node" parent="Combatant"]
+[node name="Attack" type="Node" parent="."]
 script = ExtResource("5_lw8ta")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
-script = ExtResource("5_ud16e")
-starting_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("walking_state", "death_state")]
-script = ExtResource("5_qji43")
-walking_state = NodePath("../Walking")
-death_state = NodePath("../DeathState")
-
-[node name="Walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
-script = ExtResource("6_1e1go")
-idle_state = NodePath("../Idle")
-move_speed = 10
-
-[node name="DeathState" type="Node" parent="StateMachine"]
-script = ExtResource("9_u5ld8")
+[node name="Health" parent="." instance=ExtResource("8_ttetl")]

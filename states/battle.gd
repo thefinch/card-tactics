@@ -41,7 +41,7 @@ func begin_battle() -> void:
 	# make sure we don't restart the battle when we come back into this state
 	battle_started = true
 	
-	# create a new battle manager
+	# clear out all combatants
 	reset_combatants()
 	
 	# add all the controllable combatants
@@ -52,15 +52,14 @@ func begin_battle() -> void:
 	
 	# add all the enemy combatants
 	for combatant in all_combatants:
-		combatant.set_pre_turn_callback(func():
-			print('running pre-turn callback')
-			parent.set_active_character(combatant.get_parent())
-		)
 		if !combatant.is_in_group('controllable'):
 			add_combatant(combatant)
 	
+	# make them fight
+	get_tree().call_group('combatant', 'take_turn')
+	
 	# commence the fighting
-	next_turn()
+	#next_turn()
 
 # gets the list of combatants
 func get_combatants():

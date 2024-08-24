@@ -1,11 +1,11 @@
-extends Node3D
+extends Character
 
 class_name Combatant
 
 signal turn_finished
 
 @onready
-var health_bar = $Sprite3D
+var health_bar = $Health
 
 # the max distance this action allows movement
 @export
@@ -24,15 +24,26 @@ var pre_turn_callback: Callable
 # the state that we will interact with to pull info about the battle
 var battle_state: State
 
-# set the name so we can easily identify this thing
+# get this ready to use
 func _ready():
-	prints('max health before', max_health, 'for ', get_nice_name())
+	# do all prep
+	super._ready()
+	
+	# heal up
 	max_heal()
-	prints('max health after', get_health_manager().get_health(), 'for ', get_nice_name())
+	
+	# add all actions
+	for child in get_children():
+		if child is Action:
+			add_action(child)
+			
+	# add this the combatant group
+	add_to_group('combatant')
 
-# position the health bar above the parent
-func _process(_nope:float) -> void:
-	health_bar.global_position = get_parent().global_position + Vector3(0, 7, 0)
+# position the health bar above this thing
+func _process(delta:float) -> void:
+	super._process(delta)
+	health_bar.global_position = global_position + Vector3(0, 7, 0)
 
 # hides the health bar
 func hide_health_bar():
@@ -44,22 +55,19 @@ func show_health_bar():
 
 # fully heals the combatant
 func max_heal():
-	get_health_manager().set_max_health(max_health)
-	get_health_manager().set_current_health(max_health)
+	var manager = $Health.get_health_manager()
+	manager.set_max_health(max_health)
+	manager.set_current_health(max_health)
 
 # creates a readable name for us to see during debugging
 func get_nice_name():
-	var combatant_name = get_parent().scene_file_path.get_file().replace('.tscn', '')
+	var combatant_name = scene_file_path.get_file().replace('.tscn', '')
 	combatant_name = 'combatant:' + combatant_name + ':' + str(get_instance_id())
 	return combatant_name
 
 # sets the battle state that we will interact with
 func set_battle_state(new_battle_state: State) -> void:
 	battle_state = new_battle_state
-
-# gets the health manager
-func get_health_manager() -> Health:
-	return %Health
 
 # selects which combatant we want to target
 func select_target(action: Action):

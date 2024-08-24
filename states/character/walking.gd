@@ -6,10 +6,6 @@ class_name WalkingState
 @export
 var idle_state: State
 
-# the speed at which we'll be moving
-@export
-var move_speed: int
-
 # run when the state is entered
 func enter() -> void:
 	parent.change_animation('Walk')
@@ -44,6 +40,6 @@ func process_physics(_delta: float) -> State:
 		return idle_state
 
 	# otherwise, we're moving
-	move_to_point(move_speed)
+	move_to_point(parent.move_speed)
 	
 	return null

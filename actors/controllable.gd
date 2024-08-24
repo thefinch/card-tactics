@@ -9,6 +9,7 @@ var ui
 func _ready():
 	super._ready()
 
+# sets the UI manager so we can request action info from it
 func set_ui(new_ui):
 	ui = new_ui
 

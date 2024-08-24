@@ -39,6 +39,28 @@ func load_actors() -> void:
 	
 	# let the manager know what it needs to know
 	set_active_character(elena)
+	
+	load_enemies()
+	
+func load_enemies():
+	var char_scale = 3
+	
+	# add some test enemies
+	var enemy = "res://actors/falling_column/falling_column.tscn"
+	
+	var positions = [
+		#Vector3(26.124, 0, 18.5),
+		#Vector3(26.124, 0, -19.165),
+		#Vector3(-52.142, 0, 18.5),
+		#Vector3(-52.142, 0, -19.165)
+	]
+	for enemy_position in positions:
+		var loaded = load(enemy).instantiate()
+		var scene_name = loaded.scene_file_path.get_file().replace('.tscn', '')
+		loaded.name = scene_name
+		loaded.global_scale(Vector3(char_scale, char_scale, char_scale))
+		$Enemies.add_child(loaded)
+		loaded.position = enemy_position
 
 # gets the gamera manager
 func get_camera():
@@ -64,7 +86,7 @@ func load_actor(actor):
 	loaded.name = scene_name
 	
 	# give the actor access to the UI
-	loaded.get_combatant().set_ui(ui)
+	loaded.set_ui(ui)
 	
 	# add the actor to the scene
 	$Team.add_child(loaded)

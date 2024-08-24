@@ -9,6 +9,9 @@ var battle_state: State
 # bool that turns true when the active character enters a battle start area
 var ready_for_battle: bool = false
 
+# bool that allows continuous updating of the next position for the player
+var allow_continuous: bool = false
+
 func enter() -> void:
 	# make sure the indicators are hidden
 	parent.ui.hide_move_area_indicator()
@@ -16,9 +19,7 @@ func enter() -> void:
 	parent.ui.hide_active_indicator()
 	
 	# make sure health bars are hidden
-	var all_combatants = get_tree().get_nodes_in_group('combatant')
-	for combatant in all_combatants:
-		combatant.hide_health_bar()
+	get_tree().call_group('combatant', 'hide_health_bar')
 	
 	# make sure all battle start areas start battle appropriately
 	var all_battle_starters = get_tree().get_nodes_in_group('battle_starter')
@@ -41,10 +42,11 @@ func process_input(event: InputEvent):
 		or Input.is_action_pressed('ui_right') \
 		or Input.is_action_pressed('ui_up') \
 		or Input.is_action_pressed('ui_down')
+	var current_position = parent.get_active_character().position
 	if direction_pressed:
 		# figure out the new position
-		var new_position = parent.get_active_character().position
-		var movement_amount = 2
+		var new_position = current_position
+		var movement_amount = 3
 		if Input.is_action_pressed('ui_left'):
 			new_position += Vector3(-movement_amount, 0, 0)
 		if Input.is_action_pressed('ui_right'):
@@ -55,12 +57,25 @@ func process_input(event: InputEvent):
 			new_position += Vector3(0, 0, movement_amount)
 		
 		# set the new position
+		prints('setting new position', new_position)
 		parent.get_active_character().set_target_position(new_position)
 	
 	# see if we need to click around and move anywhere
-	var clicked = event is InputEventMouseButton \
+	var start_click = event is InputEventMouseButton \
+		and event.button_index == MOUSE_BUTTON_LEFT \
+		and event.is_pressed()
+	if start_click:
+		allow_continuous = true
+	
+	# see if we need to end continuous position updates
+	var end_click = event is InputEventMouseButton \
 		and event.button_index == MOUSE_BUTTON_LEFT \
 		and event.is_released()
+	if end_click:
+		allow_continuous = false
+	
+	# if we're aiming to move somewhere, figure out where and try to go there
+	var clicked = end_click or allow_continuous
 	if clicked:
 		var hit = parent.get_camera().get_what_was_clicked()
 		if hit:

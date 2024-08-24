@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://datg0pvj1dgho"]
 
-[ext_resource type="Script" path="res://components/combatant/combatant.gd" id="1_ca0ss"]
-[ext_resource type="Script" path="res://components/combatant/health.gd" id="2_n3c15"]
+[ext_resource type="Script" path="res://components/health_bar/health_manager.gd" id="1_u0o83"]
+[ext_resource type="Script" path="res://components/health_bar/health_bar.gd" id="2_gu3pn"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ydkdd"]
 viewport_path = NodePath("SubViewport")
@@ -12,8 +12,8 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fa4l5"]
 bg_color = Color(0, 0.713726, 0.431373, 1)
 
-[node name="Combatant" type="Node3D" groups=["combatant"]]
-script = ExtResource("1_ca0ss")
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_u0o83")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 1
@@ -39,4 +39,4 @@ grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_gc22f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fa4l5")
 show_percentage = false
-script = ExtResource("2_n3c15")
+script = ExtResource("2_gu3pn")

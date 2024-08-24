@@ -8,8 +8,8 @@ var animation_player: AnimationPlayer = $Model/AnimationPlayer
 @onready
 var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
-@onready
-var combatant: Combatant = $Combatant
+@export
+var move_speed: int = 10
 
 func _ready():
 	super._ready()
@@ -18,11 +18,6 @@ func _ready():
 	for label in animation_player.get_animation_list():
 		var anim = animation_player.get_animation(label)
 		anim.loop_mode = Animation.LOOP_LINEAR
-	
-	# add all actions to the combatant
-	for child in combatant.get_children():
-		if child is Action:
-			combatant.add_action(child)
 
 # switches to the provided animation
 func change_animation(label):
@@ -54,11 +49,3 @@ func change_animation(label):
 # set the nav agent
 func set_target_position(new_position: Vector3):
 	nav_agent.target_position = new_position
-
-# gets the combantant for this character
-func get_combatant():
-	return $Combatant
-
-# checks if this character is dead
-func is_dead():
-	return $Combatant.get_health_manager().get_health() < 1

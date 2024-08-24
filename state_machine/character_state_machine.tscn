@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://tqkf612h8yty"]
+
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="1_aprnb"]
+[ext_resource type="Script" path="res://states/character/idle.gd" id="2_i2rmi"]
+[ext_resource type="Script" path="res://states/character/walking.gd" id="3_lmbot"]
+[ext_resource type="Script" path="res://states/character/death.gd" id="4_8eed5"]
+
+[node name="StateMachine" type="Node" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("1_aprnb")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="." node_paths=PackedStringArray("walking_state", "death_state")]
+script = ExtResource("2_i2rmi")
+walking_state = NodePath("../Walking")
+death_state = NodePath("../DeathState")
+
+[node name="Walking" type="Node" parent="." node_paths=PackedStringArray("idle_state")]
+script = ExtResource("3_lmbot")
+idle_state = NodePath("../Idle")
+
+[node name="DeathState" type="Node" parent="."]
+script = ExtResource("4_8eed5")
